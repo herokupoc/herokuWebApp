@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">	
+		<h:form>     
+		    <p:growl id="messages" showDetail="true" />
+		 
+		    <p:toolbar>
+		        <f:facet name="left">
+		            <p:commandButton action="#{airline.newAirline}" value="New Airline"  />		 
+		        </f:facet>
+		    </p:toolbar>
+		</h:form>
+		<h:form>
+		    <p:growl id="msgs" showDetail="true" />
+		           <p:dataTable id="basicDT" var="air" value="#{airline.airlines}">
+				        <f:facet name="header">
+				            Basic
+				        </f:facet>
+				        <p:column style="width:32px" headerText="Id">
+				            <h:outputText value="#{air.airlineId}" />
+				        </p:column>
+				        <p:column style="width:52px" headerText="MDM Alex - Id">
+				            <h:outputText value="#{air.airlineMdmId}" />
+				        </p:column>
+				        <p:column headerText="Name">
+				            <h:outputText value="#{air.airlineName}" />
+				        </p:column>
+				        <p:column style="width:90px">
+				        	<p:panelGrid columns="2">
+					             <p:commandButton action="#{airline.displayAirline}" icon="fa fa-fw fa-search" title="View">
+					                <f:setPropertyActionListener target="#{airline.selectedAirline}" value="#{air}"/>
+					            </p:commandButton>
+					            <p:commandButton action="#{airline.deleteAirline}" icon="fa fa-fw fa-trash" title="View" update="basicDT">
+					                <f:setPropertyActionListener target="#{airline.selectedAirline}" value="#{air}"/>
+					            </p:commandButton>
+					        </p:panelGrid>
+				        </p:column>
+				    </p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

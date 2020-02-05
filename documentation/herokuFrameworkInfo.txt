@@ -1,0 +1,51 @@
+
+* Typical commands heroku
+	heroku login //Ves primero al directorio donde has instalado Heroku
+	heroku create example
+
+	heroku open // Te abre la aplicación
+
+	heroku addons:create heroku-postgresql:hobby-dev
+
+
+	POSTGRESS
+		user: postgres	
+		password: admin
+
+
+	heroku config:set MAVEN_CUSTOM_GOALS="clean package -PherokuDev"
+	
+	heroku run bash
+
+	heroku buildpacks:set https://github.com/ignramgar/tomeeBuildPack.git  -a heropoc
+	
+	heroku ps:restart
+	
+	Para tener múltiples aplicaciones:
+		heroku create --remote staging herokuamduat
+		https://herokuamduat.herokuapp.com/ | https://git.heroku.com/herokuamduat.git
+	
+	
+	
+	
+	
+* Typical commands git
+
+	git push heroku master
+	
+	heroku git:remote -a appName
+	
+	https://herokuamd.herokuapp.com/
+	
+* APPS:
+
+	El código de la aplicación de la poc de Heroku está en:
+		https://rndwww.nce.amadeus.net/git/scm/herpoc/herokupoc1.git
+	
+	El build pack de tomee está en:
+		GitHub de mi cuenta https://github.com/ignramgar/tomeeBuildPack.git
+		
+* Admin database
+	Use pgadmin to admin postgress
+	La admin de postgres es pgadmin
+		

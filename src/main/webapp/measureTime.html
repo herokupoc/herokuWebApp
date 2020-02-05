@@ -1,0 +1,27 @@
+<html>
+  <head>
+  </head>
+  <body onload="loadResources()">
+    <script>
+       function loadResources()
+       {
+          var image1 = new Image();
+          image1.onload = resourceTiming;
+          image1.src = 'https://www.w3.org/Icons/w3c_main.png';
+       }
+
+       function resourceTiming()
+       {
+           var resourceList = window.performance.getEntriesByType("resource");
+           for (var i = 0; i < resourceList.length; i++)
+           {
+              if (resourceList[i].initiatorType == "img")
+              {
+                 alert("End to end resource fetch: " + resourceList[i].name + " " + (resourceList[i].responseEnd - resourceList[i].startTime));
+              }
+           }
+       }
+    </script>
+    <img id="image0" src="https://www.w3.org/Icons/w3c_home.png">
+  </body>
+</html>

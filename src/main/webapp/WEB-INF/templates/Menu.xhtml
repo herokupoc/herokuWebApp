@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<nav class="aw-menu">
+		<ul>
+			<li>
+				<h:link outcome="inicio"><i class="fa  fa-fw  fa-home"></i>Dashboard</h:link>
+			</li>
+			<li class="is-selected">
+				<h:link outcome="testEJB"><i class="fa  fa-fw  fa-user"></i>Test EJB Container</h:link>
+			</li>
+			<li>
+				<h:link outcome="crudOperations"><i class="fa  fa-fw  fa-file-text"></i>CRUD Operations</h:link>
+			</li>
+			<li>
+				<h:link><i class="fa  fa-fw  fa-search"></i>Boomi connection</h:link>
+			</li>
+		</ul>
+	</nav>
+	
+</ui:composition>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>Amadeus MKT kk</title>
+
+	<h:outputStylesheet library="mkt" name="styles/custom.css" />
+	<h:outputStylesheet library="mkt" name="styles/layout.css" />
+	<h:outputStylesheet library="mkt" name="styles/components.css" />
+	
+	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+	<h:outputScript target="body" library="mkt" name="javascripts/timing.js" />
+	<h:outputScript target="body" library="mkt" name="javascripts/app.js" />
+	
+</h:head>
+
+<h:body onload="setTimeout(htmlTimingPage, 1000)">
+
+	
+
+	<header class="aw-topbar">
+		<h:graphicImage library="mkt" name="images/amadeusLogo.png" />
+		
+		<a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>
+	</header>
+	
+	<aside class="aw-sidebar  js-sidebar">
+		<ui:include src="Menu.xhtml" />
+	</aside>
+	
+	<section class="aw-content  js-content">
+		<ui:insert name="content" />
+		
+	</section>
+	<h:outputLabel value="#{cookieHelper.cookieUserName}" style="font-weight:bold" />
+	
+	
+</h:body>
+
+</html>
