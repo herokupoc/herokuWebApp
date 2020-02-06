@@ -4,7 +4,15 @@ heroku create pocherokudev
 https://pocherokudev.herokuapp.com/ 
 https://git.heroku.com/pocherokudev.git
 
+Create a new app in Heroku with its remote
+	heroku create --remote staging myApp //Assign the app to a particular remote
+	git remote rename heroku heroku-staging //Rename a remote
+	git config heroku.remote staging //The herokucli commands will refer to this app from now on
+	
+	heroku config:set MAVEN_CUSTOM_GOALS="clean package -PherokuDev"
+
 Git commands:
 	To see all remotes repositories
 	git remote -v
-		
+	git push heroku dev:master //push to a remote in heroku the local dev to the remote master
+	git push heroku master //if what you want to send is master
