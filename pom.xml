@@ -192,6 +192,28 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>herokuLocal</id>
+			<build>
+				<plugins>	
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webResources>
+								<resource>
+									<directory>
+										build/herokuLocal
+									</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>	
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 </project>
