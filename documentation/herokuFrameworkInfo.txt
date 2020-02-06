@@ -1,3 +1,10 @@
 
 
+heroku create pocherokudev
+https://pocherokudev.herokuapp.com/ 
+https://git.heroku.com/pocherokudev.git
+
+Git commands:
+	To see all remotes repositories
+	git remote -v
 		
