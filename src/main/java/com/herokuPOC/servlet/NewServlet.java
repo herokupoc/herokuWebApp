@@ -30,7 +30,7 @@ public class NewServlet extends HttpServlet {
    *
    * @param request servlet requestw
    * @param response servlet response
-   * @throws ServletException if a servlet-specific error occursD
+   * @throws ServletException if a servlet-specific error occursDD
    * @throws IOException if an I/O error occursd
    */
   @EJB
