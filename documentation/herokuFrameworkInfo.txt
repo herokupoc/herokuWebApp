@@ -1,5 +1,3 @@
-
-
 heroku create pocherokudev
 https://pocherokudev.herokuapp.com/ 
 https://git.heroku.com/pocherokudev.git
@@ -9,10 +7,34 @@ Create a new app in Heroku with its remote
 	git remote rename heroku heroku-staging //Rename a remote
 	git config heroku.remote staging //The herokucli commands will refer to this app from now on
 	
-	heroku config:set MAVEN_CUSTOM_GOALS="clean package -PherokuDev"
+	heroku config:set PROFILE ="-PherokuDev"
 
 Git commands:
 	To see all remotes repositories
 	git remote -v
 	git push heroku dev:master //push to a remote in heroku the local dev to the remote master
 	git push heroku master //if what you want to send is master
+	
+	
+How to Start Collaborating in this project:
+
+	Clone the project from github. The name of the repository is herokuWebApp
+		>git clone https://github.com/herokupoc/herokuWebApp.git
+		>git branch -a
+		>git checkout --track origin/uat
+		>git checkout --track origin/dev
+		
+	Create a remote to heroku. 
+		>heroku git:remote -a pocherokudev
+		
+	Verify that you have a remote branch in your local git: 
+		>git remote -v
+	
+	Rename your remote to have more clarity: 
+		>git remote rename heroku heroku-[dev|uat|prod]
+	
+	Do some change in order to test that everything works properly(Example modify Menu.xhtml) Push to heroku: 
+		>git push heroku dev:master
+	
+	
+	 
