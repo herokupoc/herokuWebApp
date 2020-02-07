@@ -10,3 +10,4 @@ For local environment:
 	Maven home: C:\dev\apache-maven-3.6.2\bin\..
 	Java version: 1.8.0_231, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk1.8.0_231\jre
 
+	Server in Eclipse TOMEE_VERSION="1.7.5"
