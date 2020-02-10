@@ -10,6 +10,12 @@
    	<jta-data-source>heroku</jta-data-source>   	   	
    	
    	<class>com.herokuPOC.entity.Airline</class>
+   	
+   	<class>com.herokuPOC.entity.FileContainer</class>
+   	<class>com.herokuPOC.entity.Record</class>
+   	<class>com.herokuPOC.entity.Mail</class>
+   	<class>com.herokuPOC.entity.OrgEncoding</class>
+   	<class>com.herokuPOC.entity.User</class>
 
     <properties>
          <property name="hibernate.hbm2ddl.auto" value="update"/>

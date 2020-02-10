@@ -18,10 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author jigonzalez
- */
 @Entity
 @Table(name = "airline__c")
 @NamedQueries({ @NamedQuery(name = "airline__c.findAll", query = "SELECT a FROM Airline a") })
