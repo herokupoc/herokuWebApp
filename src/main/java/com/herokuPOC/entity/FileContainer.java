@@ -6,19 +6,12 @@
 package com.herokuPOC.entity;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import java.sql.Timestamp;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,6 +19,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "fileContainer")
+//@NamedQueries({ @NamedQuery(name = "fileContainer.findByNameAndDate", query = "SELECT f FROM fileContainer f") })
 public class FileContainer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -41,7 +35,7 @@ public class FileContainer implements Serializable {
 	private String load_status;
 	private String upload_by;
 
-	private Date upload_date;
+	private Timestamp upload_date;
 	
 	private Integer sf_qty_record_sync;         
 	         
@@ -136,13 +130,13 @@ public class FileContainer implements Serializable {
 
 
 
-	public Date getUpload_date() {
+	public Timestamp getUpload_date() {
 		return upload_date;
 	}
 
 
 
-	public void setUpload_date(Date upload_date) {
+	public void setUpload_date(Timestamp upload_date) {
 		this.upload_date = upload_date;
 	}
 
