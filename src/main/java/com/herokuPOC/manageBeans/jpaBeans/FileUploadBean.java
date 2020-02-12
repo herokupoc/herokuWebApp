@@ -15,11 +15,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.services.FileUploadFacade;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-
+import java.io.File;
 /**
  *
  * @author evangelistap
@@ -28,7 +29,9 @@ import java.util.List;
 @SessionScoped
 public class FileUploadBean {
     //class variables
-    UploadedFile file;
+    private UploadedFile file;
+    private String fileObjKeyName = null;
+    
     
     @EJB
     private FileUploadFacade fileuploadFacade;
@@ -89,7 +92,6 @@ public class FileUploadBean {
             //if passes all validations insert on DB    
             insertFiletoDb(file);
             
-            //move file to Amazon storage
             // Add message
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("File Uploaded Successfully"));
 	    FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("File Uploaded Successfully"));
@@ -104,4 +106,6 @@ public class FileUploadBean {
                        
 	
     }
+
+   
 }
