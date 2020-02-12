@@ -23,6 +23,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.services.FileUploadFacade;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -51,8 +52,6 @@ public class FileUploadBean {
     private FileUploadFacade fileuploadFacade;
     private FileContainer fileContainer;
     private String fileName;
-    private String fileOrg;
-    private String fileEncoding;
     private Timestamp timeStamp = Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
     
     
@@ -145,7 +144,7 @@ public class FileUploadBean {
                 .withRegion(clientRegion)
 		.withCredentials(new EnvironmentVariableCredentialsProvider())
                 .build();
-            System.out.println(this.fileName);
+            System.out.println(fileNameIn);
             //fileObjKeyName = fileNameIn.replace("\\","_");
             //fileObjKeyName = fileNameIn.replace('/', '_');
             //fileObjKeyName = fileNameIn.replace(' ', '_');

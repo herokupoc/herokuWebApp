@@ -19,7 +19,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "fileContainer")
-//@NamedQueries({ @NamedQuery(name = "fileContainer.findByNameAndDate", query = "SELECT f FROM fileContainer f") })
+@NamedQuery(
+    name = "fileContainer.findFileByName", 
+    query = "SELECT f.name, f.header FROM FileContainer f where f.name = :name "
+)
+
 public class FileContainer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -65,7 +69,11 @@ public class FileContainer implements Serializable {
 
 
 	public void setName(String name) {
-		this.name = name;
+            if (name.contains(".")){
+                name = name.substring(0, name.indexOf('.'));
+            }   
+        
+            this.name = name;
 	}
 
 
