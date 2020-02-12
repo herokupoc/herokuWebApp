@@ -5,14 +5,11 @@
  */
 package com.herokuPOC.services;
 
-import com.herokuPOC.entity.Airline;
 import com.herokuPOC.entity.FileContainer;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -34,10 +31,9 @@ public class FileUploadFacade extends AbstractFacade<FileContainer> {
   }
   
   
-  /*public List<FileContainer> getFileByNameAndDate(FileContainer fileUploaded){
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<FileContainer> q = cb.createQuery(FileContainer.class);
-        return em.createNamedQuery("fileContainer.findByNameAndDate", FileContainer.class).setParameter(0, fileUploaded.getName()).getResultList();
-  }*/
+  public List<FileContainer> getFileByName(FileContainer fileUploaded){
+    List<FileContainer> filesFromDb = em.createNamedQuery("fileContainer.findFileByName").setParameter("name", fileUploaded.getName()).getResultList();
+    return filesFromDb;
+  }
   
 }
