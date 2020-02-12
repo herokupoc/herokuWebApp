@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package com.herokuPOC.manageBeans.jpaBeans;
+import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -90,7 +94,6 @@ public class FileUploadBean {
             System.out.println("Uploaded File Size: "+file.getSize());
             
             //if passes all validations insert on DB    
-            insertFiletoDb(file);
             
             // Add message
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("File Uploaded Successfully"));
