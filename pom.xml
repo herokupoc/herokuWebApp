@@ -8,20 +8,7 @@
 	<url>http://maven.apache.org</url>
 	<packaging>war</packaging>
 
-	<repositories>
-        
-		<repository>
-			<id>apache-snapshots</id>
-			<url>https://repository.apache.org/content/repositories/snapshots/</url>
-		</repository>
-		<repository>
-			<url>http://repository.primefaces.org/</url>
-			<id>PrimeFaces-maven-lib</id>
-			<layout>default</layout>
-			<name>Repository for library PrimeFaces-maven-lib</name>
-		</repository>
 	
-	</repositories>
 
 	<properties>
 
@@ -114,7 +101,7 @@
             
          <dependency>
                 <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-sdk</artifactId>
+                <artifactId>aws-java-sdk-s3</artifactId>
                 <version>1.11.721</version>
             </dependency>
             
