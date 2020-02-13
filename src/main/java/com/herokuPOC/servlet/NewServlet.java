@@ -57,7 +57,7 @@ public class NewServlet extends HttpServlet {
 	{
 		FileContainer fileContainer = fileContainerFacade.findAll().get(0);
 		System.out.println("records fileContainer: " + fileContainer.getName());
-		System.out.println("records size fileContainer: " + fileContainer.getRecords().size());
+		//System.out.println("records size fileContainer: " + fileContainer.getRecords().size());
 		
 		Record record = recordFacade.findAll().get(0);
 		System.out.println("record Error Message: " + record.getErr_msg());

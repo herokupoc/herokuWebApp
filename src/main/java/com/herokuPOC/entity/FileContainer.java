@@ -48,8 +48,8 @@ public class FileContainer implements Serializable {
 	private Integer sf_qty_record_sync; 
 	
 	
-	@OneToMany(mappedBy = "fileContainer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Record> records = new ArrayList<Record>();
+	//@OneToMany(mappedBy = "fileContainer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//private List<Record> records = new ArrayList<Record>();
 	         
 
 	public FileContainer() {
@@ -174,7 +174,7 @@ public class FileContainer implements Serializable {
 	}
 
 
-
+        /*
 	public List<Record> getRecords() {
 		return records;
 	}
@@ -184,7 +184,7 @@ public class FileContainer implements Serializable {
 	public void setRecords(List<Record> records) {
 		this.records = records;
 	}
-	
+	*/
 	
 
 	

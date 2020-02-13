@@ -65,7 +65,6 @@ public class FileUploadBean {
         
         int fileRecordQty = fileLines.split("\r\n|\r|\n").length -1;
         
-        //fileContainertoDb.setId(5);
         fileContainertoDb.setLoad_status("PENDING");
         fileContainertoDb.setName(file.getFileName());
         fileContainertoDb.setUpload_by("UserName");
@@ -75,7 +74,7 @@ public class FileUploadBean {
         fileContainertoDb.setRecord_qty(fileRecordQty);
         fileContainertoDb.setHeader(header);
         
-        //ListFromDb = fileuploadFacade.findFileByNameHeader(fileContainertoDb, header);
+        ListFromDb = fileuploadFacade.findFileByNameHeader(fileContainertoDb, header);
         
         //Validation FileName&Header
         if (ListFromDb.size() > 0){
@@ -99,7 +98,7 @@ public class FileUploadBean {
             
             //if passes all validations inserts on DB    
             fileValidations(file);
-            //insertFileUploadToDb();  
+            insertFileUploadToDb();  
 
             aWSStorageFacade = new AWSStorageFacadeTemp();
             aWSStorageFacade.upload(e);			
