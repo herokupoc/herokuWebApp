@@ -15,11 +15,6 @@ import com.herokuPOC.services.AirlineFacade;
 
 public class JPATest {
 	
-	@PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
-	private EntityManager em;
-	
-
-
 	@Test
 	public void test() {
 
