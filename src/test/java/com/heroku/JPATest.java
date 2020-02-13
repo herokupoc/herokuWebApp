@@ -22,15 +22,7 @@ public class JPATest {
 
 	@Test
 	public void test() {
-		
-		AirlineFacade airlineFacade = new AirlineFacade();
-		
-		List<Airline> airlines = airlineFacade.findAll();
-		
-		System.out.println("Size of airlines: " + airlines.size());
-		
-		
-		
+
 	}
 
 }
