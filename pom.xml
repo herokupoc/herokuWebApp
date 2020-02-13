@@ -9,20 +9,24 @@
 	<packaging>war</packaging>
 
 	<repositories>
-        
+
 		<repository>
-          <id>central</id>
-          <url>http://repo1.maven.org/maven2/</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>false</enabled></snapshots>
-        </repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
 		<repository>
-			<url>http://repository.primefaces.org/</url>
 			<id>PrimeFaces-maven-lib</id>
+			<url>http://repository.primefaces.org/</url>
 			<layout>default</layout>
 			<name>Repository for library PrimeFaces-maven-lib</name>
 		</repository>
-	
+
 	</repositories>
 
 	<properties>
