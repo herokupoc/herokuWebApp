@@ -27,6 +27,7 @@ public class Airline implements Serializable {
 	 
 	@Id
 	@Basic(optional = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "airlineid__c")
 	private Integer airlineId;
 

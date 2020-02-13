@@ -19,7 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.herokuPOC.entity.Airline;
+import com.herokuPOC.entity.FileContainer;
+import com.herokuPOC.entity.Record;
 import com.herokuPOC.services.AirlineFacade;
+import com.herokuPOC.services.FileContainerFacade;
+import com.herokuPOC.services.RecordFacade;
 
 
 @WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
@@ -35,6 +39,10 @@ public class NewServlet extends HttpServlet {
    */
   @EJB
   AirlineFacade airlineFacade;
+  @EJB
+  FileContainerFacade fileContainerFacade;
+  @EJB
+  RecordFacade recordFacade;
 
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
@@ -42,34 +50,48 @@ public class NewServlet extends HttpServlet {
 	response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
 	response.setHeader("Pragma","no-cache"); //HTTP 1.0
 	response.setDateHeader ("Expires", 0);
+	
+	String command = request.getParameter("command");
+	
+	if ("1".equals(command))
+	{
+		FileContainer fileContainer = fileContainerFacade.findAll().get(0);
+		System.out.println("records fileContainer: " + fileContainer.getName());
+		System.out.println("records size fileContainer: " + fileContainer.getRecords().size());
+		
+		Record record = recordFacade.findAll().get(0);
+		System.out.println("record Error Message: " + record.getErr_msg());
+		System.out.println("fileContainer associated to record: " + record.getFileContainer().getHeader());
+		
+		
+	}
+	else
+	{
 
-    Airline airline = new Airline();
-    airline.setAirlineName("Air France1");
-    airline.setAirlineId(new Integer(1));
-    
-    Airline airline2 = new Airline();
-    airline2.setAirlineName("Air France2");
-    airline2.setAirlineId(new Integer(2));
-    
-    Airline airline3 = new Airline();
-    airline3.setAirlineName("Air France3");
-    airline3.setAirlineId(new Integer(3));
-    
-    List<Airline> listaAirlines = new ArrayList<Airline>();
-    listaAirlines.add(airline);
-    listaAirlines.add(airline2);
-    listaAirlines.add(airline3);
-    
-    request.setAttribute("airlineList", listaAirlines);
-    
-    
-    
-    
-    
-    
-    ServletContext context = this.getServletContext();
-    RequestDispatcher dispatcher = context.getRequestDispatcher("/jsp/airlines.jsp");
-    dispatcher.forward(request, response);
+	    Airline airline = new Airline();
+	    airline.setAirlineName("Air France1");
+	    airline.setAirlineId(new Integer(1));
+	    
+	    Airline airline2 = new Airline();
+	    airline2.setAirlineName("Air France2");
+	    airline2.setAirlineId(new Integer(2));
+	    
+	    Airline airline3 = new Airline();
+	    airline3.setAirlineName("Air France3");
+	    airline3.setAirlineId(new Integer(3));
+	    
+	    List<Airline> listaAirlines = new ArrayList<Airline>();
+	    listaAirlines.add(airline);
+	    listaAirlines.add(airline2);
+	    listaAirlines.add(airline3);
+	    
+	    request.setAttribute("airlineList", listaAirlines);
+	    
+	    
+	    ServletContext context = this.getServletContext();
+	    RequestDispatcher dispatcher = context.getRequestDispatcher("/jsp/airlines.jsp");
+	    dispatcher.forward(request, response);
+	}
 
   }
 

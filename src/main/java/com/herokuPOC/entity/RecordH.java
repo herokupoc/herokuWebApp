@@ -28,8 +28,8 @@ import javax.validation.constraints.Size;
  * @author jigonzalez
  */
 @Entity
-@Table(name = "record")
-public class Record implements Serializable {
+@Table(name = "recordH")
+public class RecordH implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	 
@@ -51,12 +51,24 @@ public class Record implements Serializable {
 	private String midname;
 	private String lastname;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	private Date lastUpdated;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fileContainerId")
 	private FileContainer fileContainer;
 	
 
-	public Record() {
+	public RecordH() {
+	}
+
+
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+
+
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
 	}
 
 
@@ -188,17 +200,5 @@ public class Record implements Serializable {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-
-
-	public FileContainer getFileContainer() {
-		return fileContainer;
-	}
-
-
-	public void setFileContainer(FileContainer fileContainer) {
-		this.fileContainer = fileContainer;
-	}
-	
-	
 
 }

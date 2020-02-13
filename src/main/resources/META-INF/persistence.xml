@@ -13,6 +13,7 @@
    	
    	<class>com.herokuPOC.entity.FileContainer</class>
    	<class>com.herokuPOC.entity.Record</class>
+   	<class>com.herokuPOC.entity.RecordH</class>
    	<class>com.herokuPOC.entity.Mail</class>
    	<class>com.herokuPOC.entity.OrgEncoding</class>
    	<class>com.herokuPOC.entity.User</class>

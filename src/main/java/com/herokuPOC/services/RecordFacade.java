@@ -5,14 +5,16 @@
  */
 package com.herokuPOC.services;
 
-import com.herokuPOC.entity.Airline;
+
+import com.herokuPOC.entity.Record;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 
 @Stateless
-public class AirlineFacade extends AbstractFacade<Airline> {
+public class RecordFacade extends AbstractFacade<Record> {
 
   @PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
   private EntityManager em;
@@ -22,8 +24,8 @@ public class AirlineFacade extends AbstractFacade<Airline> {
     return em;
   }
 
-  public AirlineFacade() {
-    super(Airline.class);
+  public RecordFacade() {
+    super(Record.class);
   }
   
 }
