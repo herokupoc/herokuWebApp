@@ -31,8 +31,8 @@ public class FileUploadFacade extends AbstractFacade<FileContainer> {
   }
   
   
-  public List<FileContainer> getFileByName(FileContainer fileUploaded){
-    List<FileContainer> filesFromDb = em.createNamedQuery("fileContainer.findFileByName").setParameter("name", fileUploaded.getName()).getResultList();
+  public List<FileContainer> findFileByNameHeader(FileContainer fileUploaded, String header){
+    List<FileContainer> filesFromDb = em.createNamedQuery("fileContainer.findFileByNameHeader").setParameter("name", fileUploaded.getName()).setParameter("header", header).getResultList();
     return filesFromDb;
   }
   
