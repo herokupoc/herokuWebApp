@@ -9,13 +9,6 @@
 	<packaging>war</packaging>
 
 	<repositories>
-		
-		<repository>
-          <id>central</id>
-          <url>http://repo1.maven.org/maven2/</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>false</enabled></snapshots>
-        </repository>
         
 		<repository>
 			<id>apache-snapshots</id>
@@ -27,9 +20,7 @@
 			<layout>default</layout>
 			<name>Repository for library PrimeFaces-maven-lib</name>
 		</repository>
-		
-		
-        
+	
 	</repositories>
 
 	<properties>
@@ -121,15 +112,12 @@
 		</dependency>
 
             
-            <dependency>
+         <dependency>
                 <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-sdk-s3</artifactId>
+                <artifactId>aws-java-sdk</artifactId>
                 <version>1.11.721</version>
             </dependency>
-
-
-
-    
+            
 	</dependencies>
 
 
