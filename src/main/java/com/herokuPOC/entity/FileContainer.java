@@ -6,6 +6,7 @@
 package com.herokuPOC.entity;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,16 +17,20 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author jigonzalez
- */
+
 @Entity
 @Table(name = "fileContainer")
+@NamedQuery(
+    name = "fileContainer.findFileByName", 
+    query = "SELECT f.name, f.header FROM FileContainer f where f.name = :name "
+)
+
 public class FileContainer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -76,7 +81,11 @@ public class FileContainer implements Serializable {
 
 
 	public void setName(String name) {
-		this.name = name;
+            if (name.contains(".")){
+                name = name.substring(0, name.indexOf('.'));
+            }   
+        
+            this.name = name;
 	}
 
 

@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">
+		<h1 class="aw-page-title">This page test the EJB Container</h1>
+
+	    <h:form>
+                <p:panel header="Search Files">
+                    
+                        <p:outputLabel for="@next" value="User: " />
+                        <p:inputText id="float-input" value="#{basicView.text}" />
+                    
+                        <br></br>
+                    <p:outputLabel for="@next" value="Organization: *" />
+                    <p:inputText id="float-input1" value="#{basicView.text}" />
+                    
+                </p:panel>	
+                <p:panel header="Results"></p:panel>
+	    </h:form>
+    	
+	</ui:define>
+	
+    			
+				
+											
+	
+    
+</ui:composition>

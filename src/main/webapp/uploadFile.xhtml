@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+    <ui:define name="content">
+        <p:messages id="messages" showDetail="true" closable="true" escape="true" >
+            <p:autoUpdate />
+        </p:messages>
+        <h1 class="aw-page-title">Files upload</h1>
+        <h:form enctype="multipart/form-data" style="width:600px ">
+            <p:growl id="msg" ></p:growl>
+            <!--<p:outputLabel value="Choose a file " for="fileUpload" />-->
+            <p:fileUpload label="Add Files" id="fileUpload" value="#{FileUploadBean.file}"
+                        invalidSizeMessage="Invalid Size File!"
+                        invalidFileMessage="Invalid File type!"
+                        mode="advanced" multiple="false" sizeLimit="8388608"
+                        allowTypes="/(\.|\/)(txt|csv)$/"
+                        fileUploadListener="#{FileUploadBean.fileUploadListener}"
+                        update="msg" dragDropSupport="true"
+            ></p:fileUpload>
+            <br class="aw-page-title">Acceptance criteria: *csv *txt</br>
+            <br class="aw-page-title">Max size file: 8 mb</br>           
+        </h:form>
+       
+    </ui:define>
+</ui:composition>
