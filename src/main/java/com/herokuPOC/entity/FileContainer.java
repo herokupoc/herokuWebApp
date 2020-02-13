@@ -22,8 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "fileContainer")
 @NamedQuery(
-    name = "fileContainer.findFileByName", 
-    query = "SELECT f.name, f.header FROM FileContainer f where f.name = :name "
+     name = "fileContainer.findFileByNameHeader", 
+    query = "SELECT f.name, f.header FROM FileContainer f where f.name = :name and f.header =:header "
 )
 
 public class FileContainer implements Serializable {
