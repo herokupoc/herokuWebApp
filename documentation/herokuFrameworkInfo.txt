@@ -16,7 +16,7 @@ Git commands:
 	git push heroku master //if what you want to send is master
 	
 	
-How to Start Collaborating in this project:
+How to Start Collaborating in this projectt:
 
 	Clone the project from github. The name of the repository is herokuWebApp
 		>git clone https://github.com/herokupoc/herokuWebApp.git
