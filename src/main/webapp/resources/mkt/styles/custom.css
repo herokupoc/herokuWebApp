@@ -26,3 +26,10 @@ body {
 		border: none;
 	}
 }
+
+.ui-inputfield.ui-state-disabled,
+.ui-state-disabled .ui-inputfield {
+ background-color: #8F8F8F;
+ border: solid 1px gray;
+}
+

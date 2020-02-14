@@ -5,13 +5,84 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/Layout.xhtml">
 	
-	<ui:define name="content">
-		<h1 class="aw-page-title">This page test the EJB Container</h1>
+    <ui:define name="content">
+    <h1 class="aw-page-title">Status by Record</h1>
+                
+    <h:form id="loginForm" enctype="multipart/form-data" style="width:600px "> 
+                
+        <p:panelGrid class="ui-grid-responsive">  
+       
+            <p:row>  
+                <p:column>File name: </p:column> 
+                <p:column>  
+                    <p:inputNumber id="fileName" disabled="true" value="#{statusByRecord.fileName}">  
+                        <p:ajax update="fileName" />  
+                    </p:inputNumber>  
+                </p:column> 
+                <p:column>Uploaded Date: </p:column> 
+                <p:column>  
+                    <p:inputText id="uploadDate" disabled="true" value="#{statusByRecord.uploadDate}"/>  
+                </p:column>  
+                <p:column>NB records Error: </p:column> 
+                <p:column>  
+                    <p:inputText id="nbRecordsError" disabled="true" value="#{statusByRecord.nbRecordsError}"/>  
+                </p:column>  
+                <p:column>Name : </p:column> 
+                <p:column>  
+                    <p:inputText id="name" disabled="false" value="#{statusByRecord.name}"/>  
+                </p:column>  
+            </p:row>
 
-	    <h:form>
-	      <p:editor value="#{editor.sumValue}" />
-	    </h:form>
+              <p:row>  
+                <p:column>Status: </p:column> 
+                <p:column>  
+                    <p:inputNumber id="status" disabled="true" value="#{statusByRecord.status}">  
+                        <p:ajax update="status" />  
+                    </p:inputNumber>  
+                </p:column> 
+                <p:column>NB records Sync SF: </p:column> 
+                <p:column>  
+                    <p:inputText id="nbRecordsSyncSF" disabled="true" value="#{statusByRecord.nbRecordsSyncSF}"/>  
+                </p:column>  
+                <p:column></p:column> 
+                <p:column>  
+
+                </p:column>  
+                <p:column>Account Name : </p:column> 
+                <p:column>  
+                    <p:inputText id="accountName" disabled="false" value="#{statusByRecord.accountName}"/>  
+                </p:column>  
+            </p:row>      
+
+
+            <p:row>  
+                <p:column>Organization : </p:column> 
+                <p:column>  
+                    <p:inputNumber id="organization" disabled="true" value="#{statusByRecord.organization}">  
+                        <p:ajax update="organization" />  
+                    </p:inputNumber>  
+                </p:column> 
+                <p:column>NB records : </p:column> 
+                <p:column>  
+                    <p:inputText id="nbRecords" disabled="true" value="#{statusByRecord.nbRecords}"/>  
+                </p:column>  
+                <p:column></p:column> 
+                <p:column>  
+
+                </p:column>  
+                <p:column>Error Type : </p:column> 
+                <p:column>  
+                    <p:inputText id="errorType" disabled="false" value="#{statusByRecord.errorType}"/>  
+                    <h:panelGroup style="display:inline-table; text-align:center">
+                    <p:commandButton  action="#{statusByRecord.loginProject}" value="Search" update="loginForm" ajax="false" ></p:commandButton>
+                    </h:panelGroup>
+                </p:column>  
+            </p:row>                          
+                    
+        </p:panelGrid>
+	    
+    </h:form>  
     	
-	</ui:define>
+     </ui:define>
 	
 </ui:composition>
