@@ -15,16 +15,13 @@
 			<name>Central Repository</name>
 			<url>https://repo.maven.apache.org/maven2</url>
 			<layout>default</layout>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
 		</repository>
 
 		<repository>
 			<id>PrimeFaces-maven-lib</id>
+			<name>Repository for library PrimeFaces-maven-lib</name>
 			<url>http://repository.primefaces.org/</url>
 			<layout>default</layout>
-			<name>Repository for library PrimeFaces-maven-lib</name>
 		</repository>
 
 	</repositories>
