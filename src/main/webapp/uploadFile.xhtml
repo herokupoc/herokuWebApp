@@ -6,6 +6,12 @@
 	template="/WEB-INF/templates/Layout.xhtml">
 	
     <ui:define name="content">
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage library="mkt" name="images/loading.gif" />
+        </p:dialog>
+        
         <p:messages id="messages" showDetail="true" closable="true" escape="true" >
             <p:autoUpdate />
         </p:messages>

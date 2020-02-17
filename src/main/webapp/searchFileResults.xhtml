@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Layout.xhtml">
+
+    <ui:define name="content">
+        <h1 class="aw-page-title">Results by File Con</h1>
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage library="mkt" name="images/loading.gif" />
+        </p:dialog>
+
+        <h:form>
+            
+             <p:messages >
+                <p:autoUpdate />
+            </p:messages>
+            <h:panelGrid columns="8" >
+
+                <h:outputLabel for="username" value="Username: " />
+                <p:inputText style="opacity: 1; background-color: #dddddd;" id="username" value="#{searchController.userName}" readonly="true"></p:inputText>
+
+                <h:outputLabel for="org" value="Organization: "/>
+                <p:inputText required="true" id="org" value="#{searchController.organization}" ></p:inputText>
+               
+                
+                <h:outputLabel for="calStart" value="Upload Date: " />
+                <p:calendar id="calStart" required="true" value="#{searchController.uploadStartDate}"/>
+
+                <h:outputLabel for="calEnd" value="to: " />
+                <p:calendar id="calEnd" required="true" value="#{searchController.uploadEndDate}"/>
+
+               
+
+                <h:outputLabel for="container" value="Container: "/>
+                <p:inputText style="opacity: 1; background-color: #dddddd;" id="container" value="#{searchController.container}" ></p:inputText>
+
+                <p:outputLabel for="state" value="State: " />
+                <p:selectOneMenu id="state" >
+                    <f:selectItems value="#{searchController.statusList}" var="cat" itemValue="#{searchController.inputStatus}" />
+                    <f:selectItem itemLabel="Select a Status" itemValue="#{null}" noSelectionOption="true" />
+                </p:selectOneMenu>
+
+                <p:commandButton style="align-content: flex-end" icon="ui-icon-search" value="Search" update="grid" actionListener="#{searchController.SearchFiles()}" />
+            </h:panelGrid>
+
+            <!--<p:dataGrid id="grid" value="#{searchController.filesFromDb}" var="file">
+                <p:outputLabel value="#{file.id}"/>
+                <p:outputLabel value="#{file.name}"/>
+                <p:outputLabel value="#{file.header}"/>
+                <p:outputLabel value="#{file.upload_by}"/>
+                <p:outputLabel value="#{file.record_err_qty}"/>    
+                <p:outputLabel value="#{file.record_qty}"/>    
+            </p:dataGrid>-->
+
+            <p:dataTable id="grid" resizableColumns="true" var="filecontainer" value="#{searchController.filesFromDb}" selectionMode="single" rowKey="#{filecontainer.id}" >
+                <f:facet name="header" >
+                    Results 
+                </f:facet>
+                <p:column headerText="Id" resizable="true" width="5%" >
+                    <h:outputText value="#{filecontainer.id}" />
+                </p:column>
+                <p:column headerText="File Name" resizable="true" width="20%" >
+                    <h:outputText value="#{filecontainer.name}" />
+                </p:column>
+                <p:column headerText="Status" resizable="true" width="20%" >
+                    <h:outputText value="#{filecontainer.load_status}" />
+                </p:column>
+                 <p:column headerText="NB Records" resizable="true" width="20%" >
+                     <h:outputText value="#{filecontainer.record_qty}" />
+                </p:column>
+                <p:column headerText="NB Records with Error" resizable="true" width="20%" >
+                    <h:outputText value="#{filecontainer.record_err_qty}" />
+                </p:column>
+                <p:column headerText="NB Records Sync SF" resizable="true" width="20%" >
+                    <h:outputText value="#{filecontainer.record_qty}" />
+                </p:column>
+                 <p:column headerText="Upload Date" resizable="true" width="20%" >
+                     <h:outputText value="#{filecontainer.upload_date}" />
+                </p:column>
+                
+            </p:dataTable>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
