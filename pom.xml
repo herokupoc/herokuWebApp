@@ -9,21 +9,21 @@
 	<packaging>war</packaging>
 
 	<repositories>
+
 		<repository>
-			<id>prime-repo</id>
-			<name>Prime Repo</name>
-			<url>http://repository.primefaces.org</url>
-		</repository>
-		<repository>
-			<id>apache-snapshots</id>
-			<url>https://repository.apache.org/content/repositories/snapshots/</url>
-		</repository>
-		<repository>
-			<url>http://repository.primefaces.org/</url>
-			<id>PrimeFaces-maven-lib</id>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
 			<layout>default</layout>
-			<name>Repository for library PrimeFaces-maven-lib</name>
 		</repository>
+
+		<repository>
+			<id>PrimeFaces-maven-lib</id>
+			<name>Repository for library PrimeFaces-maven-lib</name>
+			<url>http://repository.primefaces.org/</url>
+			<layout>default</layout>
+		</repository>
+
 	</repositories>
 
 	<properties>
@@ -115,7 +115,7 @@
 		</dependency>
 
             
-            <dependency>
+         <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-s3</artifactId>
                 <version>1.11.718</version>
