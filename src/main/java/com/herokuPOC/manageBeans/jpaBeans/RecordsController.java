@@ -5,7 +5,14 @@
  */
 package com.herokuPOC.manageBeans.jpaBeans;
 
+import com.herokuPOC.entity.RecordH;
+import com.herokuPOC.services.RecordHFacade;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,12 +23,16 @@ import org.primefaces.context.RequestContext;
  *
  * @author ferreirai
  */
-@ManagedBean(name = "statusByRecord")
+@ManagedBean(name = "recordsController")
 @SessionScoped
-public class StatusByRecord implements Serializable {
+public class RecordsController implements Serializable {
+
+    @EJB
+    private RecordHFacade recordEJB;
+
+    private List<RecordH> recordsList = new ArrayList<>();
     private static long serialVersionUID = 1L;
-   
-    
+
     private String fileName;
     private String uploadDate;
     private String nbRecordsError;
@@ -32,9 +43,14 @@ public class StatusByRecord implements Serializable {
     private String organization;
     private String nbRecords;
     private String errorType;
+    private String fileIdSelection;
 
-    private FileUploadBean fub;
-    
+    @PostConstruct
+    public void init() {
+        setRecordsList(new ArrayList<>());
+        
+    }
+
     /**
      * @return the serialVersionUID
      */
@@ -62,8 +78,6 @@ public class StatusByRecord implements Serializable {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
-
-    
 
     /**
      * @return the name
@@ -187,11 +201,69 @@ public class StatusByRecord implements Serializable {
     /**
      * @param nbRecordsError the nbRecordsError to set
      */
-    public void setNbRecordsError(String nbRecordsError) {        
+    public void setNbRecordsError(String nbRecordsError) {
         this.nbRecordsError = nbRecordsError;
     }
 
+    /**
+     * @return the recordsList
+     */
+    public List<RecordH> getRecordsList() {
+        return recordsList;
+    }
+
+    /**
+     * @param recordsList the recordsList to set
+     */
+    public void setRecordsList(List<RecordH> recordsList) {
+        this.recordsList = recordsList;
+    }
+
+    /**
+     * @return the fileIdSelection
+     */
+    public String getFileIdSelection() {
+        return fileIdSelection;
+    }
+
+    /**
+     * @param fileIdSelection the fileIdSelection to set
+     */
+    public void setFileIdSelection(String fileIdSelection) {
+        this.fileIdSelection = fileIdSelection;
+    }
 
     
-    
+    public String recordByFileId() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        fileIdSelection = getFileIdParam(fc);
+         
+        try {
+                
+            setRecordsList(recordEJB.recordsFromFileId(fileIdSelection));
+            
+            if(this.recordsList.isEmpty()){
+                 RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "Cant find results for this file!!"));
+                 return "searchFileResults";
+            }
+            
+        
+        } catch (Exception e) {
+          RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message", "Error in getting records from file!")); 
+        }
+        
+        return "fileContainerRecords";
+    }
+
+    //get value from "f:param"
+    public String getFileIdParam(FacesContext fc) {
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        setFileName("test");
+        setNbRecordsError("1");
+        //formFile:state_input
+        
+        return params.get("formFile:grid_selection");
+
+    }
+
 }

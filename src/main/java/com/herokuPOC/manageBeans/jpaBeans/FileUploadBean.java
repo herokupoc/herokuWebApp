@@ -105,7 +105,7 @@ public class FileUploadBean {
             
             //move file to Amazon storage
             // Add message
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "File Uploaded successfuly!!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "File Uploaded successfuly!! You will receive an email with feedback!"));
 																										  
 	    
         } catch (Exception ex) {
