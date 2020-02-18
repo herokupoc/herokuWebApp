@@ -5,16 +5,11 @@
  */
 package com.herokuPOC.webservices;
 
-import java.io.InputStream;
-import javax.ejb.Stateless;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
@@ -28,7 +23,8 @@ import javax.ws.rs.core.MediaType;
 //@Stateless
 public class Job {
 
-    //@PersistenceContext(unitName="job")
+    private Job2Runner job2Runner;
+    private Job3Runner job3Runner;
     
     @Context
     private UriInfo context;
@@ -37,6 +33,7 @@ public class Job {
      * Creates a new instance of Job
      */
     public Job() {
+  
     }
 
     /**
@@ -50,9 +47,12 @@ public class Job {
     public String runJob(@PathParam("jobId") String jobId) {
         //
         if (jobId.equals("2")) {
+            job2Runner = new Job2Runner();
             System.out.println("CHAMEI O JOB 2");
+            
             return "OK";  
         } if (jobId.equals("3")) {
+            job3Runner = new Job3Runner();
             System.out.println("CHAMEI O JOB 3");
             return "OK";  
         } else {            

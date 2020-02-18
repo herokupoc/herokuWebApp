@@ -28,4 +28,6 @@ public class RecordFacade extends AbstractFacade<Record> {
     super(Record.class);
   }
   
+  
+  
 }

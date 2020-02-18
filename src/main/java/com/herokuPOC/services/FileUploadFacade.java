@@ -40,4 +40,18 @@ public class FileUploadFacade extends AbstractFacade<FileContainer> {
     return filesFromDb;
   }
   
+  public List<FileContainer> findAllUploadedToDb(){
+    List<FileContainer> filesFromDb = em.createNamedQuery("fileContainer.findFileByNameHeader").setParameter("load_status", "PENDING").getResultList();
+    return filesFromDb;
+  }
+  public boolean update(FileContainer fileContainer){
+      
+      FileContainer fileContainerTemp = em.find(FileContainer.class, fileContainer.getId());
+      
+      em.getTransaction().begin();
+      fileContainerTemp.setLoad_status("LOADED");
+      em.getTransaction().commit();
+      
+      return true;
+  }
 }

@@ -102,8 +102,8 @@ public class AWSStorageFacadeTemp {
         }
     }
    
-   public List<RecordFacade> getRecordsFromFile(String date,String fileNameId) throws IOException{
-       List<RecordFacade> listToDb = new ArrayList<RecordFacade>();
+   public boolean getRecordsFromFile(String date,String fileNameId) throws IOException{
+       List<Record> listToDb = new ArrayList<Record>();
        
        S3Object fullObject = null, objectPortion = null, headerOverrideObject = null;
         String fileObjKeyName = null;
@@ -123,47 +123,69 @@ public class AWSStorageFacadeTemp {
             fullObject = s3Client.getObject(new GetObjectRequest(bucketName, date+"/"+fileNameId));
             //fileuploadFacade.findFileByNameHeader(date+"/"+fileNameId, date);
             listToDb = getRecordList(fileNameId,fullObject.getObjectContent());
+            if (listToDb.isEmpty()) return false;
+            for (Record record : listToDb) {
+                recordFacade.create(record);
+            }
+            
          } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
+            return false;
         } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
+            return false;
         } finally {
             // To ensure that the network connection doesn't remain open, close any open input streams.
             if (fullObject != null) {
                 fullObject.close();
             }                      
         }
-        return listToDb;
+        return true;
    }
    
    // TO DO -> this function should return an Array of File Records
-    private List<RecordFacade> getRecordList(String fileName, InputStream input) throws IOException {
-        List<RecordFacade> listToDb = new ArrayList<RecordFacade>();
+    private List<Record> getRecordList(String fileName, InputStream input) throws IOException {
+        List<Record> listToDb = new ArrayList<Record>();
         Record recordToDb = new Record();
         // Read the text input stream one line at a time and display each line.
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         String line = null;
-        while ((line = reader.readLine()) != null) {
+        // while there is a new line and this new line is not the header record
+        while ((line = reader.readLine()) != null && !reader.readLine().substring(0,2).equals("CO")) {  
             System.out.println(line);
             String[] arrOfStr = line.split("|", 5); 
             recordToDb = new Record();
             //
-            //recordToDb.setFileContainer(fileName);
-            recordToDb.setErr_type(arrOfStr[0]);
-            recordToDb.setErr_msg(arrOfStr[1]);
-            recordToDb.setContact_flag(arrOfStr[2]);
-            recordToDb.setAccount_flag(arrOfStr[3]);
-            recordToDb.setOwner_flag(arrOfStr[4]);
-            recordToDb.setSfcontact_id(arrOfStr[5]);
-            recordToDb.setContact_org(arrOfStr[6]);
-            recordToDb.setSalutation(arrOfStr[7]);
-            recordToDb.setFirstname(arrOfStr[8]);
-            recordToDb.setMidname(arrOfStr[9]);
-            recordToDb.setLastname(arrOfStr[10]);
+            /*
+            0  CO-D-01-04Feb2020-F-I-06-001-CP1252|	-> file_line
+            1  ERROR_TYPE|				-> err_type
+            2  ERROR_MSG|				-> err_msg
+            3  Contact Flag|  				-> contact_flag
+            4  Account Flag|				-> account_flag
+            5  Sales Team Flag|				-> owner_flag
+            6  Salesforce Contact Id|			-> sfcontact_id
+            7  Contact Organization|			-> contact_org
+            8  Salutation|				-> salutation
+            9  First Name|				-> firstname
+            10 Mid Name|				-> midname
+            11 Last Name|				-> lastname
+            */
+            recordToDb.setFile_line(Integer.parseInt(arrOfStr[0]));
+            recordToDb.setErr_type(arrOfStr[1]);
+            recordToDb.setErr_msg(arrOfStr[2]);
+            recordToDb.setContact_flag(arrOfStr[3]);
+            recordToDb.setAccount_flag(arrOfStr[4]);
+            recordToDb.setOwner_flag(arrOfStr[5]);
+            recordToDb.setSfcontact_id(arrOfStr[6]);
+            recordToDb.setContact_org(arrOfStr[7]);
+            recordToDb.setSalutation(arrOfStr[8]);
+            recordToDb.setFirstname(arrOfStr[9]);
+            recordToDb.setMidname(arrOfStr[10]);
+            recordToDb.setLastname(arrOfStr[11]);
         }
         
         return listToDb;
