@@ -90,9 +90,11 @@ public class FileUploadBean {
     try {
                 
             this.file = e.getFile();
+            
+            System.out.println("this.file: " + this.file);
            
             if (file.getFileName().substring(0, file.getFileName().indexOf('.')).length() != 8){
-               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Filename2 is not correct"));
+               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error2!", "Filename is not correct"));
                return;
             }
             
