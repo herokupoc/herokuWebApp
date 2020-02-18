@@ -1,40 +1,35 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<nav class="aw-menu">
-		<ul>
-			<li>
-				<h:link outcome="inicio"><i class="fa  fa-fw  fa-home"></i>Dashboard</h:link>
-			</li>
-                    <li>
-				<h:link outcome="login"><i class="fa  fa-fw  fa-user"></i>Login</h:link>
-			</li>
-			<li class="is-selected">
-				<h:link outcome="uploadFile"><i class="fa  fa-fw  fa-user"></i>Upload new file</h:link>
-			</li>
-                    
-                    <li class="is-selected">
-				<h:link outcome="searchFile"><i class="fa  fa-fw  fa-user"></i>Search files</h:link>
-			</li>
-                    
-                    <li class="is-selected">
-				<h:link outcome="statusByRecord"><i class="fa  fa-fw  fa-user"></i>Status By Record</h:link>
-			</li>
-                    
-			
-			<li class="is-selected">
-				<h:link outcome="testEJB"><i class="fa  fa-fw  fa-user"></i>List of Containers files</h:link>
-			</li>
-			
-			<li class="is-selected">
-				<h:link outcome="testEJB"><i class="fa  fa-fw  fa-user"></i>Test EJB Container</h:link>
-			</li>
-			<li>
-				<h:link outcome="crudOperations"><i class="fa  fa-fw  fa-file-text"></i>CRUD Operations</h:link>
-			</li>
-		</ul>
-	</nav>
-	
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+
+
+    <nav class="aw-menu">
+        <ul>
+            <li>
+                <h:link outcome="index"><i class="fa  fa-fw  fa-home"></i>Dashboard</h:link>
+            </li>
+            <li class="is-selected">
+                <h:link outcome="uploadFile"><i class="fa  fa-fw  fa-user"></i>Upload new file</h:link>
+            </li>
+            <li>
+                <h:link outcome="searchFileResults"><i class="fa  fa-fw  fa-file-text"></i>Files container search</h:link>
+            </li>
+            <li >
+                <h:link outcome="recordByFileContainer"><i class="fa  fa-fw  fa-user"></i>Status By Record</h:link>
+            </li>
+            
+        </ul>
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage library="mkt" name="images/loading.gif" />
+        </p:dialog>
+    </nav>
+
+
+
 </ui:composition>

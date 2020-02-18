@@ -1,45 +1,31 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/Layout.xhtml">
-	
-	<ui:define name="content">
-        <p:messages id="messages" showDetail="true" closable="true" escape="true" >
-            <p:autoUpdate />
-        </p:messages>
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Login.xhtml">
 
-             <h:form id="loginForm" enctype="multipart/form-data" style="width:600px ">
-        <p:growl id="msg" showDetail="true" life="3000" />
-            <p:panel header="Login" style="width: 360px;">
- 
-                <h:panelGrid id="loginPanel" columns="2">
-                    <h:panelGroup style="display:inline-table; text-align:center">
-    
-                        <h:outputText value="Username: " />
-                        
-                        <p:inputText id="username" value="#{loginBean.uname}" ></p:inputText>
+    <ui:define name="content">
+        <h:body>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage library="mkt" name="images/loading.gif" />
+            </p:dialog>
+            
+            <h:form>
+                <p:messages autoUpdate="true" showDetail="true" />
+                <h:panelGrid columns="2">
+                    <p:outputLabel for="txtUser" value="user"/>
+                    <p:inputText id="txtUser" value="#{userController.user.userName}" required="true"/>
 
-                        <p:spacer></p:spacer>
-
-                        <p:message for="username" ></p:message>
-                        <br></br>   
-                        <h:outputText value="Password: " />
-
-                        <p:password id="password" value="#{loginBean.password}"  feedback="false"></p:password>
-
-                        <p:spacer></p:spacer>
-
-                        <p:message for="password"></p:message>
-<br></br>
-                        <p:spacer></p:spacer>
-                        <p:commandButton  action="#{loginBean.loginProject}" value="Login" update="loginForm" ajax="false" ></p:commandButton>
-                      </h:panelGroup>   
-                        
+                    <p:outputLabel for="txtPass" value="organization"/>
+                    <p:inputText id="txtPass" value="#{userController.user.organization}" required="true"/>
+                    <p:column />
+                    <p:commandButton icon="ui-icon-key" value="Login" action="#{userController.Login()}"/>
                 </h:panelGrid>
- 
-            </p:panel>
-    </h:form>
-	 </ui:define>
+            </h:form>
+        </h:body>
+
+
+    </ui:define>
 </ui:composition>
