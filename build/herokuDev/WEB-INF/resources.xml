@@ -3,9 +3,9 @@
 
   <Resource id="heroku" type="javax.sql.DataSource">
 		jdbcDriver=org.postgresql.Driver
-		password=24f8ccee3f93baffa15045a082bdb8fa8a5921145cfb9d28ab0216d936c5fd52
-		userName=txunfvlduojtoh
-		jdbcUrl=jdbc:postgresql://ec2-35-168-54-239.compute-1.amazonaws.com:5432/d7l8jug0b5o0ct
+		password=db1daadcd0b833231ae3b343ee6250b57161a8ae5046704dcfea64622e106007
+		userName=dcjonyzddymktp
+		jdbcUrl=jdbc:postgresql://ec2-52-73-247-67.compute-1.amazonaws.com:5432/d77c2mm1elrklc
 		ssl=true
 		sslfactory=org.postgresql.ssl.NonValidatingFactory
 	</Resource>
