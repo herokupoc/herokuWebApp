@@ -16,7 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.User;
-import com.herokuPOC.services.AWSStorageFacadeTemp;
+import com.herokuPOC.services.StorageManager;
 import com.herokuPOC.services.FileUploadFacade;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class FileUploadBean {
     private final Timestamp timeStamp = Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
     private List<FileContainer> ListFromDb = new ArrayList<FileContainer>();
     FileContainer fileContainertoDb = new FileContainer();
-    private AWSStorageFacadeTemp aWSStorageFacade;
+    private StorageManager aWSStorageFacade;
 
     public UploadedFile getFile() {
         return file;
@@ -106,7 +106,7 @@ public class FileUploadBean {
             flagFileInDb = fileValidations(file);
 
             if (!flagFileInDb) {
-                aWSStorageFacade = new AWSStorageFacadeTemp();
+                aWSStorageFacade = new StorageManager();
                 aWSStorageFacade.upload(e);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "File Uploaded successfuly!! You will receive an email with feedback!"));
             }
