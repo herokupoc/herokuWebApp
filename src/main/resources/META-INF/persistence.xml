@@ -10,6 +10,7 @@
    	<jta-data-source>heroku</jta-data-source>   	   	
 
    	
+  	
    	<class>com.herokuPOC.entity.FileContainer</class>
    	<class>com.herokuPOC.entity.Record</class>
    	<class>com.herokuPOC.entity.RecordH</class>
