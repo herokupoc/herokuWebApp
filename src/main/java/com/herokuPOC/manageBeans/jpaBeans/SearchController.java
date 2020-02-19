@@ -14,9 +14,11 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -43,6 +45,8 @@ public class SearchController implements Serializable{
     private String name = null;
     private Date uploadStartDate = null;
     private Date uploadEndDate = null;  
+    private FileContainer selectedFile;
+    private List<FileContainer> selectedFiles;
     
     @PostConstruct
     public void init(){
@@ -53,6 +57,7 @@ public class SearchController implements Serializable{
      * @return the statusList
      */
     public List<String> getStatusList() {
+        statusList.clear();
         statusList.add("PENDING");
         statusList.add("COMPLETED");
         statusList.add("ERROR");
@@ -194,7 +199,34 @@ public class SearchController implements Serializable{
         this.uploadStartDate = uploadStartDate;
     }
     
-    
+    /**
+     * @return the selectedFile
+     */
+    public FileContainer getSelectedFile() {
+        return selectedFile;
+    }
+
+    /**
+     * @param selectedFile the selectedFile to set
+     */
+    public void setSelectedFile(FileContainer selectedFile) {
+        this.selectedFile = selectedFile;
+    }
+
+    /**
+     * @return the selectedFiles
+     */
+    public List<FileContainer> getSelectedFiles() {
+        return selectedFiles;
+    }
+
+    /**
+     * @param selectedFiles the selectedFiles to set
+     */
+    public void setSelectedFiles(List<FileContainer> selectedFiles) {
+        this.selectedFiles = selectedFiles;
+    }
+
     
     public void SearchFiles() {
         try {
