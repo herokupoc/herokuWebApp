@@ -1,31 +1,31 @@
 package com.herokuPOC.entity;
 
 import java.io.Serializable;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
 @Table(name = "fileContainer")
-@NamedQuery(
-     name = "fileContainer.findFileByNameHeader", 
-    query = "SELECT f.name, f.header FROM FileContainer f where f.name = :name and f.header =:header "
-)
-
+@NamedQueries({
+    @NamedQuery(
+         name = "fileContainer.findFileByNameHeader", 
+        query = "SELECT f.name, f.header FROM FileContainer f where f.name = :name and f.header =:header "
+    ),
+    @NamedQuery(
+         name = "fileContainer.findAllUploadedToDb", 
+        query = "SELECT f.name FROM FileContainer f where f.load_status = 'PENDING' "
+    )
+}) 
+@XmlRootElement
 public class FileContainer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
