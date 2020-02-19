@@ -76,9 +76,9 @@ public class FileContainer implements Serializable {
 
 
 	public void setName(String name) {
-            if (name.contains(".")){
-                name = name.substring(0, name.indexOf('.'));
-            }   
+            //if (name.contains(".")){
+            //    name = name.substring(0, name.indexOf('.'));
+            //}   
         
             this.name = name;
 	}
