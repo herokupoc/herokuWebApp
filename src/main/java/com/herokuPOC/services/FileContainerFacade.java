@@ -35,11 +35,11 @@ public class FileContainerFacade extends AbstractFacade<FileContainer> implement
     }
     
     
-    public List<FileContainer> SearchByInputForm(String userName, Date uploadDate){
+    public List<FileContainer> SearchByInputForm(){
         List<FileContainer> filesFromDb = null;
             
         try {
-            String querySearch = "SELECT f FROM filecontainer f ";
+            String querySearch = "SELECT f FROM Filecontainer f ";
             Query query = em.createQuery(querySearch);
             filesFromDb = query.getResultList();
             

@@ -10,8 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import org.junit.Test;
 
-import com.herokuPOC.entity.Airline;
-import com.herokuPOC.services.AirlineFacade;
+
 
 public class JPATest {
 	

@@ -18,10 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herokuPOC.entity.Airline;
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.Record;
-import com.herokuPOC.services.AirlineFacade;
 import com.herokuPOC.services.FileContainerFacade;
 import com.herokuPOC.services.RecordFacade;
 
@@ -37,8 +35,7 @@ public class NewServlet extends HttpServlet {
    * @throws ServletException if a servlet-specific error occursDDw
    * @throws IOException if an I/O error occursd
    */
-  @EJB
-  AirlineFacade airlineFacade;
+
   @EJB
   FileContainerFacade fileContainerFacade;
   @EJB
@@ -68,29 +65,7 @@ public class NewServlet extends HttpServlet {
 	else
 	{
 
-	    Airline airline = new Airline();
-	    airline.setAirlineName("Air France1");
-	    airline.setAirlineId(new Integer(1));
-	    
-	    Airline airline2 = new Airline();
-	    airline2.setAirlineName("Air France2");
-	    airline2.setAirlineId(new Integer(2));
-	    
-	    Airline airline3 = new Airline();
-	    airline3.setAirlineName("Air France3");
-	    airline3.setAirlineId(new Integer(3));
-	    
-	    List<Airline> listaAirlines = new ArrayList<Airline>();
-	    listaAirlines.add(airline);
-	    listaAirlines.add(airline2);
-	    listaAirlines.add(airline3);
-	    
-	    request.setAttribute("airlineList", listaAirlines);
-	    
-	    
-	    ServletContext context = this.getServletContext();
-	    RequestDispatcher dispatcher = context.getRequestDispatcher("/jsp/airlines.jsp");
-	    dispatcher.forward(request, response);
+
 	}
 
   }

@@ -44,13 +44,13 @@
                 <p:column headerText="File Id" resizable="true" width="10%" >
                     <h:outputText value="#{filerecords.file_id}" />
                 </p:column>
-                <p:column headerText="Error Message" resizable="true" width="20%" >
+                <p:column headerText="Error Message" resizable="true" width="20%" filterBy="#{filerecords.err_msg}">
                     <h:outputText value="#{filerecords.err_msg}" />
                 </p:column>
                 <p:column headerText="account flag" resizable="true" width="15%" >
                     <h:outputText value="#{filerecords.account_flag}" />
                 </p:column>
-                <p:column headerText="firstname" resizable="true" width="15%" >
+                <p:column headerText="firstname" resizable="true" width="15%" filterBy="#{filerecords.firstname}">
                     <h:outputText value="#{filerecords.firstname}" />
                 </p:column>
                 <p:column headerText="lastname" resizable="true" width="15%" >
