@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.herokuPOC.manageBeans.jpaBeans;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -14,7 +15,8 @@ import org.primefaces.model.UploadedFile;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.herokuPOC.entity.FileContainer;
-import com.herokuPOC.services.AWSStorageFacadeTemp;												   
+import com.herokuPOC.entity.User;
+import com.herokuPOC.services.AWSStorageFacadeTemp;
 import com.herokuPOC.services.FileUploadFacade;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,18 +36,18 @@ import org.primefaces.context.RequestContext;
 @ManagedBean(name = "FileUploadBean")
 @SessionScoped
 public class FileUploadBean {
+
     //class variables
     private UploadedFile file;
-    
+
     @EJB
     private FileUploadFacade fileuploadFacade;
-										
-							
+
     private final Timestamp timeStamp = Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
     private List<FileContainer> ListFromDb = new ArrayList<FileContainer>();
     FileContainer fileContainertoDb = new FileContainer();
-    private AWSStorageFacadeTemp aWSStorageFacade;    
-	
+    private AWSStorageFacadeTemp aWSStorageFacade;
+
     public UploadedFile getFile() {
         return file;
     }
@@ -53,86 +55,86 @@ public class FileUploadBean {
     public void setFile(UploadedFile file) {
         this.file = file;
     }
-	 
 
-    public void fileValidations(UploadedFile file) throws IOException{
-   
+    public boolean fileValidations(UploadedFile file) throws IOException {
+
         InputStream filecontent = file.getInputstream();
         String fileLines = getFileContent(filecontent);
-        
+
         String[] fileDelimited = fileLines.split("\\|");
         String header = fileDelimited[0];
-        
-        int fileRecordQty = fileLines.split("\r\n|\r|\n").length -1;
-        
+        User us = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+
+        int fileRecordQty = fileLines.split("\r\n|\r|\n").length - 1;
+
         fileContainertoDb.setLoad_status("PENDING");
         fileContainertoDb.setName(file.getFileName());
-        fileContainertoDb.setUpload_by("UserName");
+        fileContainertoDb.setUpload_by(us.getUserName());
         fileContainertoDb.setUpload_date(timeStamp);
         fileContainertoDb.setRecord_err_qty(0);
         fileContainertoDb.setSf_qty_record_sync(0);
         fileContainertoDb.setRecord_qty(fileRecordQty);
         fileContainertoDb.setHeader(header);
-        
+
         ListFromDb = fileuploadFacade.findFileByNameHeader(fileContainertoDb, header);
-        
+
         //Validation FileName&Header
-        if (ListFromDb.size() > 0){
-                RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message", "File Already been uploaded! " + file.getFileName())); 
+        if (ListFromDb.size() > 0) {
+            RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning Message", "File Already been uploaded! " + file.getFileName()));
+            return true;
+        } else {
+            insertFileUploadToDb();
+        }
+
+        return false;
+    }
+
+    public void fileUploadListener(FileUploadEvent e) {
+        // Get uploaded file from the FileUploadEvent
+        boolean flagFileInDb = false;
+
+        try {
+
+            this.file = e.getFile();
+
+            if (file.getFileName().substring(0, file.getFileName().indexOf('.')).length() != 8) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Filename is not correct"));
                 return;
             }
-    }
-   
-													  
-    public void fileUploadListener(FileUploadEvent e){
-    // Get uploaded file from the FileUploadEvent
-		 
-    try {
-                
-            this.file = e.getFile();
-           
-            if (file.getFileName().substring(0, file.getFileName().indexOf('.')).length() != 8){
-               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Filename is not correct"));
-               return;
+
+            //if passes all validations inserts on DB    
+            flagFileInDb = fileValidations(file);
+
+            if (!flagFileInDb) {
+                aWSStorageFacade = new AWSStorageFacadeTemp();
+                aWSStorageFacade.upload(e);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "File Uploaded successfuly!! You will receive an email with feedback!"));
             }
             
-            //if passes all validations inserts on DB    
-            fileValidations(file);
-            insertFileUploadToDb();  
-
-            aWSStorageFacade = new AWSStorageFacadeTemp();
-            aWSStorageFacade.upload(e);			
-            
-            //move file to Amazon storage
-            // Add message
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "File Uploaded successfuly!! You will receive an email with feedback!"));
-																										  
-	    
         } catch (Exception ex) {
-             RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message", "Error Uploading File!")); 
-             Logger.getLogger(FileUploadBean.class.getName()).log(Level.SEVERE, null, ex);
+            RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message", "Error Uploading File!"));
+            Logger.getLogger(FileUploadBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
+
         return;
     }
 
     private void insertFileUploadToDb() {
-       fileuploadFacade.create(fileContainertoDb);
+        fileuploadFacade.create(fileContainertoDb);
     }
 
-    
-   public String getFileContent( InputStream fis ) throws UnsupportedEncodingException, IOException {
-    ByteArrayOutputStream result = new ByteArrayOutputStream();
-    byte[] buffer = new byte[1024];
-    int length;
-    
-    while ((length = fis.read(buffer)) != -1) {
-        result.write(buffer, 0, length);
-    
+    public String getFileContent(InputStream fis) throws UnsupportedEncodingException, IOException {
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int length;
+
+        while ((length = fis.read(buffer)) != -1) {
+            result.write(buffer, 0, length);
+
+        }
+        // StandardCharsets.UTF_8.name() > JDK 7
+
+        return result.toString("UTF-8");
+
     }
-    // StandardCharsets.UTF_8.name() > JDK 7
-    
-    return result.toString("UTF-8");
-    
-   }
 }

@@ -231,7 +231,7 @@ public class SearchController implements Serializable{
     public void SearchFiles() {
         try {
             filesFromDb = fileContainerEJB.findAll();
-            //filesFromDb = fileContainerEJB.SearchByInputForm(userName, uploadEndDate);
+            //(filesFromDb = fileContainerEJB.SearchByInputForm();
         
         } catch (Exception e) {
             System.out.println("com.herokuPOC.manageBeans.jpaBeans.SearchController.SearchFiles()");
@@ -240,13 +240,5 @@ public class SearchController implements Serializable{
         return;
         
     }
-    
-    public void SearchTest(){
-        System.out.println("com.herokuPOC.manageBeans.jpaBeans.SearchController.SearchFiles()");
-    
-    }
-
-
-
     
 }
