@@ -5,6 +5,8 @@
  */
 package com.herokuPOC.webservices;
 
+import com.herokuPOC.services.JobManager;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -23,11 +25,9 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.APPLICATION_JSON})
 @Stateless
 public class Job {
-
-    private Job2Runner job2Runner;
-    private Job3Runner job3Runner;
-
-            
+    @EJB
+    private JobManager jobManager;
+        
     @Context
     private UriInfo context;
 
@@ -37,7 +37,6 @@ public class Job {
     public Job() {
   
     }
-
     /**
      * Retrieves representation of an instance of com.herokuPOC.webservices.Job
      * @param jobId
@@ -48,26 +47,18 @@ public class Job {
     @Produces(MediaType.APPLICATION_JSON)
     public String runJob(@PathParam("jobId") String jobId) {
         //
-        
-         
-        
         if (jobId.equals("2")) {
-            job2Runner = new Job2Runner();
-            //job2Runner.run();
+            jobManager.executeJob1();
             System.out.println("CHAMEI O JOB 2");
             
             return "OK";  
         } if (jobId.equals("3")) {
-            job3Runner = new Job3Runner();
-            //job3Runner.run();
+            jobManager.executeJob2();
             System.out.println("CHAMEI O JOB 3");
             return "OK";  
         } else {            
             System.out.println("ERRO !!!!!!!!!!!!");
             return "KO";  
-        }
-                
+        }                
     }
-
-    
 }
