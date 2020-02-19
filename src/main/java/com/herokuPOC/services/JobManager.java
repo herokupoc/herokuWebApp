@@ -5,25 +5,30 @@
  */
 package com.herokuPOC.services;
 
-import com.herokuPOC.entity.Airline;
+import com.herokuPOC.entity.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 
 @Stateless
-public class AirlineFacade extends AbstractFacade<Airline> {
+public class JobManager {
 
-  @PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
-  private EntityManager em;
+    @PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
+    private EntityManager em;
 
-  @Override
-  protected EntityManager getEntityManager() {
-    return em;
-  }
-
-  public AirlineFacade() {
-    super(Airline.class);
-  }
-  
+    
+    public void executeJob1(){ 
+    	
+    }
+    
+    public void executeJob2(){ 
+    	
+    	
+    }
+    
+    
+    
 }

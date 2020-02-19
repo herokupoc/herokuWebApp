@@ -9,8 +9,6 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.herokuPOC.entity.Airline;
-import com.herokuPOC.services.AirlineFacade;
 
 @ManagedBean(name = "user")
 @SessionScoped
