@@ -5,6 +5,7 @@
  */
 package com.herokuPOC.webservices;
 
+import javax.ejb.Stateless;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -20,7 +21,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/job")
 @Produces({MediaType.APPLICATION_JSON})
-//@Stateless
+@Stateless
 public class Job {
 
     private Job2Runner job2Runner;
@@ -46,13 +47,18 @@ public class Job {
     @Produces(MediaType.APPLICATION_JSON)
     public String runJob(@PathParam("jobId") String jobId) {
         //
+        
+         
+        
         if (jobId.equals("2")) {
             job2Runner = new Job2Runner();
+            job2Runner.run();
             System.out.println("CHAMEI O JOB 2");
             
             return "OK";  
         } if (jobId.equals("3")) {
             job3Runner = new Job3Runner();
+            job3Runner.run();
             System.out.println("CHAMEI O JOB 3");
             return "OK";  
         } else {            
