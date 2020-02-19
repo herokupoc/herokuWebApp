@@ -26,7 +26,8 @@ public class Job {
 
     private Job2Runner job2Runner;
     private Job3Runner job3Runner;
-    
+
+            
     @Context
     private UriInfo context;
 
@@ -52,13 +53,13 @@ public class Job {
         
         if (jobId.equals("2")) {
             job2Runner = new Job2Runner();
-            job2Runner.run();
+            //job2Runner.run();
             System.out.println("CHAMEI O JOB 2");
             
             return "OK";  
         } if (jobId.equals("3")) {
             job3Runner = new Job3Runner();
-            job3Runner.run();
+            //job3Runner.run();
             System.out.println("CHAMEI O JOB 3");
             return "OK";  
         } else {            

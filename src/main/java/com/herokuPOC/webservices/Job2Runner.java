@@ -20,7 +20,7 @@ import javax.ejb.EJB;
  *
  * @author ferreirai
  */
-public class Job2Runner {
+public class Job2Runner { 
     // declare
     private AWSStorageFacadeTemp aWSStorageFacade;
     private boolean success;
