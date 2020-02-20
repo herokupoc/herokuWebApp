@@ -6,7 +6,7 @@
 package com.herokuPOC.manageBeans.jpaBeans;
 
 import com.herokuPOC.entity.RecordH;
-import com.herokuPOC.services.RecordHFacade;
+import com.herokuPOC.services.ContainerManager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import org.primefaces.context.RequestContext;
 public class RecordsController implements Serializable {
 
     @EJB
-    private RecordHFacade recordEJB;
+    private ContainerManager recordEJB;
 
     private List<RecordH> recordsList = new ArrayList<>();
     private static long serialVersionUID = 1L;

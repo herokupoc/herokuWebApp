@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.Record;
 import com.herokuPOC.services.ContainerManager;
-import com.herokuPOC.services.RecordFacade;
 
 
 @WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
@@ -38,8 +37,7 @@ public class NewServlet extends HttpServlet {
 
   @EJB
   ContainerManager fileContainerFacade;
-  @EJB
-  RecordFacade recordFacade;
+
 
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
@@ -56,9 +54,7 @@ public class NewServlet extends HttpServlet {
 		System.out.println("records fileContainer: " + fileContainer.getName());
 		//System.out.println("records size fileContainer: " + fileContainer.getRecords().size());
 		
-		Record record = recordFacade.findAll().get(0);
-		System.out.println("record Error Message: " + record.getErr_msg());
-		System.out.println("fileContainer associated to record: " + record.getFileContainer().getHeader());
+		
 		
 		
 	}

@@ -38,7 +38,7 @@ public class StorageManager {
     private EntityManager em;
     
     @EJB
-    private RecordFacade recordFacade; 
+    private ContainerManager recordFacade; 
    
     public StorageManager() {
 
@@ -130,7 +130,7 @@ public class StorageManager {
             if (listToDb.isEmpty()) return false;
             for (Record record : listToDb) {
                 if(record.getFileContainer() != null){
-                    recordFacade.create(record);
+                    recordFacade.createRecord(record);
                 }
             }
             

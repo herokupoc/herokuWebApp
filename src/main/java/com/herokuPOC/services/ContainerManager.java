@@ -6,12 +6,17 @@
 package com.herokuPOC.services;
 
 import com.herokuPOC.entity.FileContainer;
+import com.herokuPOC.entity.Record;
+import com.herokuPOC.entity.RecordH;
 import com.herokuPOC.entity.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.primefaces.context.RequestContext;
 
 
 @Stateless
@@ -112,6 +117,26 @@ public class ContainerManager {
         List<FileContainer> fileContainerList = query.getResultList();        
         return fileContainerList;
     }
+     public void createRecord(Record record){
+        //em.getTransaction().begin();  
+        em.persist(record);       
+        //em.getTransaction().commit();  
+    }       
+    public List<RecordH> recordsFromFileId(String fileId){
+        String recordListQuery;
+        List<RecordH> recordsList = new ArrayList<>();
+        try {
             
+            recordListQuery = "SELECT h from RecordH h where file_id = :fileid ";
+            Query query = em.createQuery(recordListQuery);
+            query.setParameter("fileid", Integer.valueOf(fileId));
+            
+            recordsList = query.getResultList();
+            
+        } catch (Exception e) {
+            RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message", "Error in getting records from file!")); 
+        }
     
+        return recordsList;
+    }
 }
