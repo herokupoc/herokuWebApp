@@ -17,8 +17,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.xml.rpc.ParameterMode;
+
 
 @Stateless
 public class JobManager {
@@ -33,7 +32,7 @@ public class JobManager {
     @EJB
     private StorageManager storageManager; 
     @EJB
-    private FileUploadFacade fileUploadFacade;
+    private ContainerManager fileUploadFacade;
     private boolean success;
     
     public void executeJob1(){ 

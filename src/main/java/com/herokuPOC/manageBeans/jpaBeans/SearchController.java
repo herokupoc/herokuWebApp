@@ -7,7 +7,7 @@ package com.herokuPOC.manageBeans.jpaBeans;
 
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.User;
-import com.herokuPOC.services.FileUploadFacade;
+import com.herokuPOC.services.ContainerManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.FacesException;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
@@ -31,7 +30,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -44,7 +42,7 @@ public class SearchController implements Serializable{
 
     
     @EJB 
-    private FileUploadFacade fileContainerEJB;
+    private ContainerManager fileContainerEJB;
     
     User us = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
        
@@ -245,9 +243,7 @@ public class SearchController implements Serializable{
     
     public void SearchFiles() {
         try {
-            filesFromDb = fileContainerEJB.findAll();
-            //(filesFromDb = fileContainerEJB.SearchByInputForm();
-        
+            filesFromDb = fileContainerEJB.findAllFileContainer();        
         } catch (Exception e) {
             System.out.println("com.herokuPOC.manageBeans.jpaBeans.SearchController.SearchFiles()");
         

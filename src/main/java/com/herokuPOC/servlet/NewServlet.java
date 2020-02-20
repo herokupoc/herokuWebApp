@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.Record;
-import com.herokuPOC.services.FileUploadFacade;
+import com.herokuPOC.services.ContainerManager;
 import com.herokuPOC.services.RecordFacade;
 
 
@@ -37,7 +37,7 @@ public class NewServlet extends HttpServlet {
    */
 
   @EJB
-  FileUploadFacade fileContainerFacade;
+  ContainerManager fileContainerFacade;
   @EJB
   RecordFacade recordFacade;
 
@@ -52,7 +52,7 @@ public class NewServlet extends HttpServlet {
 	
 	if ("1".equals(command))
 	{
-		FileContainer fileContainer = fileContainerFacade.findAll().get(0);
+		FileContainer fileContainer = fileContainerFacade.findAllFileContainer().get(0);
 		System.out.println("records fileContainer: " + fileContainer.getName());
 		//System.out.println("records size fileContainer: " + fileContainer.getRecords().size());
 		

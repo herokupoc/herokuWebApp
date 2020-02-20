@@ -1,6 +1,5 @@
 package com.herokuPOC.services;
 
-import antlr.StringUtils;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
@@ -40,7 +39,6 @@ public class StorageManager {
     
     @EJB
     private RecordFacade recordFacade; 
-    private FileUploadFacade fileuploadFacade;
    
     public StorageManager() {
 
@@ -127,7 +125,7 @@ public class StorageManager {
                 .build();
 				
             fullObject = s3Client.getObject(new GetObjectRequest(bucketName, date+"/"+fileNameId));
-            //fileuploadFacade.findFileByNameHeader(date+"/"+fileNameId, date);
+            
             listToDb = getRecordList(fileNameId,fullObject.getObjectContent(),fileContainer);
             if (listToDb.isEmpty()) return false;
             for (Record record : listToDb) {

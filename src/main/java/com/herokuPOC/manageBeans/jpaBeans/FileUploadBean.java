@@ -16,8 +16,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.User;
+import com.herokuPOC.services.ContainerManager;
 import com.herokuPOC.services.StorageManager;
-import com.herokuPOC.services.FileUploadFacade;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,7 +41,7 @@ public class FileUploadBean {
     private UploadedFile file;
 
     @EJB
-    private FileUploadFacade fileuploadFacade;
+    private ContainerManager fileuploadFacade;
 
     private final Timestamp timeStamp = Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
     private List<FileContainer> ListFromDb = new ArrayList<FileContainer>();
@@ -120,7 +120,7 @@ public class FileUploadBean {
     }
 
     private void insertFileUploadToDb() {
-        fileuploadFacade.create(fileContainertoDb);
+        fileuploadFacade.createFileContainer(fileContainertoDb);
     }
 
     public String getFileContent(InputStream fis) throws UnsupportedEncodingException, IOException {
@@ -137,4 +137,7 @@ public class FileUploadBean {
         return result.toString("UTF-8");
 
     }
+    
+    
+    
 }
