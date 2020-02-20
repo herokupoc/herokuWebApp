@@ -50,6 +50,12 @@ public class Record implements Serializable {
 	private String firstname;
 	private String midname;
 	private String lastname;
+        private String mail;
+        private String cellular;
+        private String account_segmentation;
+        private String validated;
+        private String flagto_sf;
+        
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fileContainerId")
@@ -198,6 +204,76 @@ public class Record implements Serializable {
 	public void setFileContainer(FileContainer fileContainer) {
 		this.fileContainer = fileContainer;
 	}
+
+    /**
+     * @return the mail
+     */
+    public String getMail() {
+        return mail;
+    }
+
+    /**
+     * @param mail the mail to set
+     */
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    /**
+     * @return the cellular
+     */
+    public String getCellular() {
+        return cellular;
+    }
+
+    /**
+     * @param cellular the cellular to set
+     */
+    public void setCellular(String cellular) {
+        this.cellular = cellular;
+    }
+
+    /**
+     * @return the account_segmentation
+     */
+    public String getAccount_segmentation() {
+        return account_segmentation;
+    }
+
+    /**
+     * @param account_segmentation the account_segmentation to set
+     */
+    public void setAccount_segmentation(String account_segmentation) {
+        this.account_segmentation = account_segmentation;
+    }
+
+    /**
+     * @return the validated
+     */
+    public String getValidated() {
+        return validated;
+    }
+
+    /**
+     * @param validated the validated to set
+     */
+    public void setValidated(String validated) {
+        this.validated = validated;
+    }
+
+    /**
+     * @return the flagto_sf
+     */
+    public String getFlagto_sf() {
+        return flagto_sf;
+    }
+
+    /**
+     * @param flagto_sf the flagto_sf to set
+     */
+    public void setFlagto_sf(String flagto_sf) {
+        this.flagto_sf = flagto_sf;
+    }
 	
 	
 
