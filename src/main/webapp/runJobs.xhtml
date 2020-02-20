@@ -3,25 +3,14 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/Layout.xhtml">
-	
+	template="/WEB-INF/templates/Layout.xhtml">	
 	<ui:define name="content">
 		<h1 class="aw-page-title">Run Jobs 2 and 3</h1>
-
 	    <h:form>
-                 <h:panelGrid columns="8" >
-                    
-                       <p:commandButton style="align-content: flex-end" icon="ui-icon-spinner" value="Run Job 2" actionListener="#{searchController.RunJob(2)}" />
-                       <p:commandButton style="align-content: flex-end" icon="ui-icon-spinner" value="Run Job 3" actionListener="#{searchController.RunJob(3)}" />
-                    
+                 <h:panelGrid columns="8" >                    
+                       <p:commandButton style="align-content: flex-end" icon="ui-icon-spinner" value="Run Data Validation" actionListener="#{searchController.RunJob(2)}" />
+                       <p:commandButton style="align-content: flex-end" icon="ui-icon-spinner" value="Run Data Integrity" actionListener="#{searchController.RunJob(3)}" />                    
                </h:panelGrid>
-	    </h:form>
-    	
-	</ui:define>
-	
-    			
-				
-											
-	
-    
+	    </h:form>    	
+	</ui:define>																		
 </ui:composition>
