@@ -6,7 +6,7 @@
 package com.herokuPOC.manageBeans.jpaBeans;
 
 import com.herokuPOC.entity.User;
-import com.herokuPOC.services.UserFacade;
+import com.herokuPOC.services.ContainerManager;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -25,7 +25,7 @@ import org.primefaces.context.RequestContext;
 public class UserController implements Serializable{
    
     @EJB
-    private UserFacade EJBUser;
+    private ContainerManager EJBUser;
     private User user;
 
     

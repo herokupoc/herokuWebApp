@@ -25,4 +25,30 @@ public class ContainerManager {
 
     }   
     
+    
+    public User Login(User us){
+        User user = null;
+        String userFromDb;
+        
+        try {
+            
+            userFromDb = "SELECT u from User u where username = :name and organization= :org ";
+            Query query = em.createQuery(userFromDb);
+            query.setParameter("name", us.getUserName());
+            query.setParameter("org", us.getOrganization());
+            
+            List<User> userList = query.getResultList();
+            
+            if(!userList.isEmpty()){
+                user = userList.get(0);
+            }
+            
+        } catch (Exception e) {
+            throw e;
+        
+        }
+    
+        return user;
+    }
+    
 }
