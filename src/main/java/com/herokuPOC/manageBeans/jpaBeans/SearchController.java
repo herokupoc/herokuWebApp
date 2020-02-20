@@ -276,16 +276,16 @@ public class SearchController implements Serializable{
         return url;
     }
 
-    public void RunJob2(){
+    public void RunJob(int job){
         try {
             HttpClient client ;
             HttpGet request ;
             HttpResponse response ;
             
-            System.out.println("Running Job 2...");
+            System.out.println("Running Job " + job);
             
             client = new DefaultHttpClient();
-            request = new HttpGet(getUrl()+"/webresources/job/2");
+            request = new HttpGet(getUrl()+"/webresources/job/"+job);
             response = client.execute(request);
             BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
             String line = "";
@@ -296,24 +296,5 @@ public class SearchController implements Serializable{
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void RunJob3(){
-        try {
-            HttpClient client ;
-            HttpGet request ;
-            HttpResponse response ;
-            
-            System.out.println("Running Job 3...");
-            
-            client = new DefaultHttpClient();
-            request = new HttpGet(getUrl()+"/webresources/job/3");
-            response = client.execute(request);
-            BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
-            String line = "";
-            while ((line = rd.readLine()) != null) {
-                System.out.println(line);    
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 }
