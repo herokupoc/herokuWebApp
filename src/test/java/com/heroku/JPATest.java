@@ -14,9 +14,9 @@ import org.junit.Test;
 
 public class JPATest {
 	
-	@Test
-	public void test() {
+	//@Test
+	//public void test() {
 
-	}
+	//}
 
 }

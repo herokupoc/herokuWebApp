@@ -16,13 +16,16 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 
 
 @Stateless
 public class JobManager {
     private List<FileContainer> listFromDb ;
-    
+    private boolean success;    
 
     
     
@@ -33,7 +36,7 @@ public class JobManager {
     private StorageManager storageManager; 
     @EJB
     private ContainerManager fileUploadFacade;
-    private boolean success;
+    
     
     public void executeJob1(){ 
         
@@ -72,8 +75,23 @@ public class JobManager {
     }
     
     public void executeJob2(){ 
-    	
-    	
+       
+         StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("public.test");
+    // set parameters
+      storedProcedure.registerStoredProcedureParameter("var", String.class, ParameterMode.IN);
+      storedProcedure.registerStoredProcedureParameter("var", String.class, ParameterMode.OUT);
+      storedProcedure.setParameter( "var","FODASSE");
+      storedProcedure.executeUpdate();
+
+      String objectList = (String)storedProcedure.getSingleResult();
+      System.out.println("objectList : " + objectList);
+      //for (int i = 0; i< objectList.size(); i++) {
+          //Account currAccount = new Account ((Object[]) objectList.get(i));
+          //tmpList.add(currAccount);
+         // System.out.println("currAccount : " + currAccount.toString()); 
+    
+      //}
+        
     }
     
     public void sendEmail(String from, String to, String subject,String body){
