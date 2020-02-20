@@ -5,9 +5,9 @@
  */
 package com.herokuPOC.manageBeans.jpaBeans;
 
-import com.herokuPOC.services.FileContainerFacade;
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.User;
+import com.herokuPOC.services.FileUploadFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,7 +44,7 @@ public class SearchController implements Serializable{
 
     
     @EJB 
-    private FileContainerFacade fileContainerEJB;
+    private FileUploadFacade fileContainerEJB;
     
     User us = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
        

@@ -65,4 +65,20 @@ public class FileUploadFacade extends AbstractFacade<FileContainer> {
       
       return true;
   }
+  
+  public List<FileContainer> SearchByInputForm(){
+        List<FileContainer> filesFromDb = null;
+            
+        try {
+            String querySearch = "SELECT f FROM Filecontainer f ";
+            Query query = em.createQuery(querySearch);
+            filesFromDb = query.getResultList();
+            
+        } catch (Exception e) {
+        
+        }
+        
+        return filesFromDb;
+    }
+  
 }

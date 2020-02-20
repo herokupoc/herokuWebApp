@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.Record;
-import com.herokuPOC.services.FileContainerFacade;
+import com.herokuPOC.services.FileUploadFacade;
 import com.herokuPOC.services.RecordFacade;
 
 
@@ -37,7 +37,7 @@ public class NewServlet extends HttpServlet {
    */
 
   @EJB
-  FileContainerFacade fileContainerFacade;
+  FileUploadFacade fileContainerFacade;
   @EJB
   RecordFacade recordFacade;
 
