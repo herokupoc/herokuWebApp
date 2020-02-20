@@ -8,16 +8,29 @@ package com.herokuPOC.manageBeans.jpaBeans;
 import com.herokuPOC.services.FileContainerFacade;
 import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.User;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -45,12 +58,14 @@ public class SearchController implements Serializable{
     private String name = null;
     private Date uploadStartDate = null;
     private Date uploadEndDate = null;  
+    private String url = null;
     private FileContainer selectedFile;
     private List<FileContainer> selectedFiles;
     
     @PostConstruct
     public void init(){
         filesFromDb = new ArrayList<>();
+        this.url = getApplicationUri();
     }
     
     /**
@@ -241,4 +256,64 @@ public class SearchController implements Serializable{
         
     }
     
+    public String getApplicationUri() {
+        try {
+          FacesContext ctxt = FacesContext.getCurrentInstance();
+            ExternalContext ext = ctxt.getExternalContext();
+            URI uri = new URI(ext.getRequestScheme(),
+                null, ext.getRequestServerName(), ext.getRequestServerPort(),
+                ext.getRequestContextPath(), null, null);
+          return uri.toASCIIString();
+        } catch (URISyntaxException e) {
+          throw new FacesException(e);
+        }
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    public void RunJob2(){
+        try {
+            HttpClient client ;
+            HttpGet request ;
+            HttpResponse response ;
+            
+            System.out.println("Running Job 2...");
+            
+            client = new DefaultHttpClient();
+            request = new HttpGet(getUrl()+"/webresources/job/2");
+            response = client.execute(request);
+            BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
+            String line = "";
+            while ((line = rd.readLine()) != null) {
+                System.out.println(line);    
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void RunJob3(){
+        try {
+            HttpClient client ;
+            HttpGet request ;
+            HttpResponse response ;
+            
+            System.out.println("Running Job 3...");
+            
+            client = new DefaultHttpClient();
+            request = new HttpGet(getUrl()+"/webresources/job/3");
+            response = client.execute(request);
+            BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
+            String line = "";
+            while ((line = rd.readLine()) != null) {
+                System.out.println(line);    
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

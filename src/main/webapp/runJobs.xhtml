@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">
+		<h1 class="aw-page-title">Run Jobs 2 and 3</h1>
+
+	    <h:form>
+                 <h:panelGrid columns="8" >
+                    
+                       <p:commandButton style="align-content: flex-end" icon="ui-icon-spinner" value="Run Job 2" actionListener="#{searchController.RunJob2()}" />
+                       <p:commandButton style="align-content: flex-end" icon="ui-icon-spinner" value="Run Job 3" actionListener="#{searchController.RunJob3()}" />
+                    
+               </h:panelGrid>
+	    </h:form>
+    	
+	</ui:define>
+	
+    			
+				
+											
+	
+    
+</ui:composition>
