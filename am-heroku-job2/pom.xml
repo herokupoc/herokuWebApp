@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>herokuPOC-Parent</artifactId>
+        <groupId>com.amadeus.websolutions</groupId>
+        <version>1.0</version>
+    </parent>
+
+	<name>herokuPOC-Job2</name>
+	<artifactId>am-heroku-job2</artifactId>
+	<url>http://maven.apache.org</url>
+	<packaging>jar</packaging>
+
+
+
+	<dependencies>
+	</dependencies>
+
+
+	<build>
+		<!-- Maven will append the version to the finalName (which is the name 
+			given to the generated war, and hence the context root) -->
+		<finalName>${project.artifactId}</finalName>
+
+		<plugins>
+			
+
+		</plugins>
+	</build>
+</project>

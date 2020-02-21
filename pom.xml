@@ -2,137 +2,25 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.amadeus.websolutions</groupId>
-	<artifactId>herokuPOC</artifactId>
+	<artifactId>herokuPOC-Parent</artifactId>
 	<version>1.0</version>
-	<name>primefaces Maven Webapp</name>
+	<name>herokuPOC-Parent</name>
 	<url>http://maven.apache.org</url>
-	<packaging>war</packaging>
-
-	<repositories>
-		<repository>
-			<id>prime-repo</id>
-			<name>Prime Repo</name>
-			<url>http://repository.primefaces.org</url>
-		</repository>
-		<repository>
-			<id>apache-snapshots</id>
-			<url>https://repository.apache.org/content/repositories/snapshots/</url>
-		</repository>
-		<repository>
-			<url>http://repository.primefaces.org/</url>
-			<id>PrimeFaces-maven-lib</id>
-			<layout>default</layout>
-			<name>Repository for library PrimeFaces-maven-lib</name>
-		</repository>
-	</repositories>
-
-	<properties>
-
-		<tomee.flavor>uber</tomee.flavor>
-		
+	<packaging>pom</packaging>
 
 	
+
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
-
-		<version.compiler.plugin>3.6.0</version.compiler.plugin>
-		<version.surefire.plugin>2.16</version.surefire.plugin>
-		<version.jar.plugin>3.0.2</version.jar.plugin>
-		<version.war.plugin>2.6</version.war.plugin>
-
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		 
-		
-
+		<version.compiler.plugin>3.6.0</version.compiler.plugin>
+		<version.war.plugin>2.6</version.war.plugin>
+		<version.jar.plugin>3.0.2</version.jar.plugin>
 	</properties>
 
-
-
 	<dependencies>
-
-		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>6.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.primefaces.themes</groupId>
-			<artifactId>all-themes</artifactId>
-			<version>1.0.10</version>
-		</dependency>
-
-	<!-- https://mvnrepository.com/artifact/javax/javaee-api -->
-		<dependency>
-		    <groupId>javax</groupId>
-		    <artifactId>javaee-api</artifactId>
-		    <version>7.0</version>
-		    <scope>provided</scope>
-		</dependency>	
-
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.1-901-1.jdbc4</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		    <version>5.2.0.Final</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-entitymanager</artifactId>
-		    <version>5.2.1.Final</version>
-		</dependency>
-
-
-		<dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.6.1</version> 
-        </dependency>   
-        <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>1.6.1</version>
-        </dependency>
-        
-		<dependency>
-		    <groupId>org.postgresql</groupId>
-		    <artifactId>postgresql</artifactId>
-		    <version>42.2.5.jre7</version>
-		</dependency>
-
-            
-            <dependency>
-                <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-sdk-s3</artifactId>
-                <version>1.11.718</version>
-            </dependency>
-
-
-            <!-- https://mvnrepository.com/artifact/javax.ws.rs/jsr311-api -->
-            <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>jsr311-api</artifactId>
-                <version>1.1.1</version>
-            </dependency>
-
-    
 	</dependencies>
 
 
@@ -141,14 +29,6 @@
 			given to the generated war, and hence the context root) -->
 		<finalName>${project.artifactId}</finalName>
 
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>META-INF/persistence.xml</include>
-				</includes>
-			</resource>
-		</resources>
 		<plugins>
 			<!-- Compiler plugin enforces Java 1.6 compatibility and activates annotation 
 				processors -->
@@ -186,52 +66,11 @@
 
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>herokuDev</id>
-			<build>
-				<plugins>	
-					<plugin>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<webResources>
-								<resource>
-									<directory>
-										build/herokuDev
-									</directory>
-									<includes>
-										<include>**/*</include>
-									</includes>
-								</resource>
-							</webResources>
-						</configuration>
-					</plugin>	
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>herokuLocal</id>
-			<build>
-				<plugins>	
-					<plugin>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<webResources>
-								<resource>
-									<directory>
-										build/herokuLocal
-									</directory>
-									<includes>
-										<include>**/*</include>
-									</includes>
-								</resource>
-							</webResources>
-						</configuration>
-					</plugin>	
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
+	
+	<modules>
+	 	<module>am-heroku-war</module>
+        <module>am-heroku-job2</module>
+       
+     
+    </modules>
 </project>
