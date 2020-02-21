@@ -6,7 +6,7 @@
         persistence_2_1.xsd">
         
 	<persistence-unit name="com.amadeus.websolutions_herokuPOC" transaction-type="JTA">
-   	<provider>org.hibernate.ejb.HibernatePersistence</provider>   	
+   	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>   	
    	<jta-data-source>heroku</jta-data-source>   	   	
 
    	
