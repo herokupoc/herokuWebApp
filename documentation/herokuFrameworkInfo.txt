@@ -13,14 +13,14 @@ Create a new app in Heroku with its remote
 	
 	heroku config:set PROFILE ="-PherokuDev"
 
-Git commands:
+Git commandss:
 	To see all remotes repositories
 	git remote -v
 	git push heroku dev:master //push to a remote in heroku the local dev to the remote master
 	git push heroku master //if what you want to send is master
 	
 	
-How to Start Collaborating in this project:
+How to Startt Collaborating in this project:
 
 	Clone the project from github. The name of the repository is herokuWebApp
 		>git clone https://github.com/herokupoc/herokuWebApp.git
@@ -31,7 +31,7 @@ How to Start Collaborating in this project:
 	Create a remote to heroku. 
 		>heroku git:remote -a pocherokudev
 		
-	Verify that you have a remote branch in your local git: 
+	Verify thatt you have a remote branch in your local git: 
 		>git remote -v
 	
 	Rename your remote to have more clarity: 
