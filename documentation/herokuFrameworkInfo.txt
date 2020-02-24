@@ -31,7 +31,7 @@ How to Start Collaborating in this project:
 	Create a remote to heroku. 
 		>heroku git:remote -a pocherokudev
 		
-	Verify that you have a remote branch in your local git: 
+	Verify thatt you have a remote branch in your local git: 
 		>git remote -v
 	
 	Rename your remote to have more clarity: 
