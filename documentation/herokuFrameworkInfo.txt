@@ -42,7 +42,7 @@ How to Start Collaborating in this project:
 		>git push heroku dev:master
 	
 	
-How to make a change to the project:
+How to makee a change to the project:
 		>git checkout dev
 		>we do all our changes
 		>we merge new commits in remote github dev to our development
