@@ -4,6 +4,7 @@ https://git.heroku.com/pocherokudev.git
 
 heroku login
 heroku run bash
+heroku logs --tail --app worker3
 
 Create a new app in Heroku with its remote
 	heroku create --remote staging myApp //Assign the app to a particular remote
@@ -50,4 +51,10 @@ How to make a change to the project:
 		>git commit -m "our message" .
 		>git push
 		>git push heroku-dev dev:master
+		
+Jobs:
+	Create the app worker3
+	heroku create worker3 --no-remote
+	heroku deploy:jar target\am-heroku-job3-jar-with-dependencies.jar --app worker3
+	
 	 
