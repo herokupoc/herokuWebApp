@@ -66,7 +66,7 @@ public class JobManager {
                         if(integrityDone && update) {
                             // send email to the user saying that the file is vailable for searching in the webapp
                             String body = "The file " + fileName +" was validated and can be checked for errors in the records.\n";
-                            mailManager.sendMail2User("general@amadeus.com", "Amadeus POC - File validated: " + fileName, body);
+                            //mailManager.sendMail2User("general@amadeus.com", "Amadeus POC - File validated: " + fileName, body);
                         }
                     }
                 } catch (IOException ex) {
