@@ -90,14 +90,14 @@ public class JobManager {
         try{
             StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("public.checkdataintegrity");
          // set parameters
-           storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
-           storedProcedure.registerStoredProcedureParameter(2, Integer.class, ParameterMode.OUT);
+           storedProcedure.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
+           storedProcedure.registerStoredProcedureParameter(2, Boolean.class, ParameterMode.OUT);
            storedProcedure.setParameter(1, fileContainerId);
            Boolean out = (Boolean)storedProcedure.getOutputParameterValue(2);
            
            System.out.println("out : " + out.toString());                     
            
-       } catch (IllegalArgumentException | IllegalStateException iae){
+       } catch (IllegalArgumentException | IllegalStateException | java.lang.ClassCastException iae){
            // send email to central team
            String body = "Error on process: checkdataintegrity " + "JOB3" + "\n";
            body = body + iae.getLocalizedMessage();

@@ -84,9 +84,10 @@ public class ContainerManager {
       
       FileContainer fileContainerTemp = em.find(FileContainer.class, fileContainer.getId());
       
-      em.getTransaction().begin();
+      //em.getTransaction().begin();
       fileContainerTemp.setLoad_status("LOADED");
-      em.getTransaction().commit();
+      em.persist(fileContainerTemp);       
+      //em.getTransaction().commit();
       
       return true;
   }
