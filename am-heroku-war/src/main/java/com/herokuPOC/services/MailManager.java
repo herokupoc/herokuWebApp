@@ -12,14 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
-import com.sendgrid.*;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.security.cert.X509Certificate;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
+
 
 /**
  *
