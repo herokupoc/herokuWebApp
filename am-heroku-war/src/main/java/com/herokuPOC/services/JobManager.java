@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
@@ -96,13 +98,13 @@ public class JobManager {
            Boolean out = (Boolean)storedProcedure.getOutputParameterValue(2);
            
            System.out.println("out : " + out.toString());                     
-           
+                
        } catch (IllegalArgumentException | IllegalStateException | java.lang.ClassCastException iae){
            // send email to central team
            String body = "Error on process: checkdataintegrity " + "JOB3" + "\n";
            body = body + iae.getLocalizedMessage();
            //mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
-           bReturn = false;
+           bReturn = false;           
        }
         return bReturn;
     }
@@ -116,16 +118,14 @@ public class JobManager {
            Boolean out = (Boolean)storedProcedure.getOutputParameterValue(1);
 
            System.out.println("integratedata_sf output : " + out.toString());                     
-           
+          
        } catch (IllegalArgumentException | IllegalStateException iae){
            // send email to central team
            String body = "Error on process: integratedata_sf " + "JOB3" + "\n";
            body = body + iae.getLocalizedMessage();
            //mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
-
-           
-       }
-       
+          
+       }       
     }
     /*
     public void sendEmail(String from, String to, String subject,String body){
