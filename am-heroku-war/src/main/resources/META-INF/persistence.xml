@@ -17,7 +17,7 @@
    	<class>com.herokuPOC.entity.Mail</class>
    	<class>com.herokuPOC.entity.OrgEncoding</class>
    	<class>com.herokuPOC.entity.User</class>
-        <class>com.herokuPOC.entity.MailStore</class>
+    <class>com.herokuPOC.entity.MailStore</class>
 
     <properties>
          <property name="hibernate.hbm2ddl.auto" value="update"/>
