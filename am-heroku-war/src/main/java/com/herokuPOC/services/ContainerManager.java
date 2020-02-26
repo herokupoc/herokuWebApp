@@ -199,7 +199,7 @@ public class ContainerManager {
         List<RecordH> recordsList = new ArrayList<>();
         try {
             
-            recordListQuery = "SELECT h from RecordH h where file_id = :fileid ";
+            recordListQuery = "SELECT h from RecordH h where filecontainerid = :fileid ";
             Query query = em.createQuery(recordListQuery);
             query.setParameter("fileid", Integer.valueOf(fileId));
             
@@ -211,4 +211,10 @@ public class ContainerManager {
     
         return recordsList;
     }
+    public FileContainer findFileByName(int id){
+        FileContainer filesFromDb;
+        filesFromDb = (FileContainer)em.createNamedQuery("fileContainer.findFileById").setParameter("id", id).getSingleResult();
+    return filesFromDb;
+  }
+    
 }
