@@ -30,6 +30,11 @@ import javax.xml.bind.annotation.XmlRootElement;
          name = "fileContainer.findAllUploadedToDb", 
         query = "SELECT f.name FROM FileContainer f where f.load_status = 'PENDING' "
     )
+        ,
+    @NamedQuery(
+         name = "fileContainer.findFileById", 
+        query = "SELECT f FROM FileContainer f where f.id = :id "
+    )
 }) 
 
 

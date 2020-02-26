@@ -21,19 +21,22 @@
                 <p:inputText id="FileName" style="opacity: 1; background-color: #dddddd;" value="#{recordsController.fileName}" readonly="true"></p:inputText>
 
                 <h:outputLabel for="status" value="Status "/>
-                <p:inputText id="status" style="opacity: 1; background-color: #dddddd;" value="#{searchController.organization}" readonly="true"></p:inputText>
+                <p:inputText id="status" style="opacity: 1; background-color: #dddddd;" value="#{recordsController.status}" readonly="true"></p:inputText>
 
                 <h:outputLabel for="uploadDate" value="Upload Date: " />
-                <p:inputText id="uploadDate" style="opacity: 1; background-color: #dddddd;" value="#{searchController.organization}" readonly="true"/>
+                <p:inputText id="uploadDate" style="opacity: 1; background-color: #dddddd;" value="#{recordsController.uploadDate}" readonly="true"/>
 
                 <h:outputLabel for="org" value="Organization: " />
-                <p:inputText  id="org" style="opacity: 1; background-color: #dddddd;" value="#{searchController.organization}" readonly="true"/>
+                <p:inputText  id="org" style="opacity: 1; background-color: #dddddd;" value="#{recordsController.organization}" readonly="true"/>
 
-                <h:outputLabel for="recordError" value="NB Rocords Error:"/>
-                <p:inputText id="recordError" style="opacity: 1; background-color: #dddddd;"  value="#{searchController.organization}" readonly="true"></p:inputText>
+                <h:outputLabel for="recordError" value="NB Records Error:"/>
+                <p:inputText id="recordError" style="opacity: 1; background-color: #dddddd;"  value="#{recordsController.nbRecordsError}" readonly="true"></p:inputText>
 
-                <h:outputLabel for="recordQty" value="NB Rocords:"/>
-                <p:inputText id="recordQty" style="opacity: 1; background-color: #dddddd;"  value="#{searchController.organization}" readonly="true"></p:inputText>
+                <h:outputLabel for="recordQty" value="NB Records:"/>
+                <p:inputText id="nbRecords" style="opacity: 1; background-color: #dddddd;"  value="#{recordsController.nbRecords}" readonly="true"></p:inputText>
+                
+                <h:outputLabel for="nbRecordsSyncSF" value="NB Records Sync SF:"/>
+                <p:inputText id="nbRecordsSyncSF" style="opacity: 1; background-color: #dddddd;"  value="#{recordsController.nbRecordsSyncSF}" readonly="true"></p:inputText>
 
             </h:panelGrid>
 

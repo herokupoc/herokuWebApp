@@ -211,4 +211,10 @@ public class ContainerManager {
     
         return recordsList;
     }
+    public FileContainer findFileByName(int id){
+        FileContainer filesFromDb;
+        filesFromDb = (FileContainer)em.createNamedQuery("fileContainer.findFileById").setParameter("id", id).getSingleResult();
+    return filesFromDb;
+  }
+    
 }
