@@ -250,7 +250,7 @@ public class RecordsController implements Serializable {
         status = fileContainer.getLoad_status();
         nbRecordsSyncSF = fileContainer.getSf_qty_record_sync().toString();
         nbRecords = fileContainer.getRecord_qty().toString();
-        organization = fileContainer.getHeader().substring(0, 2);
+        organization = fileContainer.getName().substring(0, 2);
 
                 
         try {

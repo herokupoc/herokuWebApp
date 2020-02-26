@@ -18,7 +18,7 @@
 
 
                 <h:outputLabel for="FileName" value="File Name " />
-                <p:inputText id="FileName" style="opacity: 1; background-color: #dddddd;" value="#{recordsController.fileName}" readonly="true"></p:inputText>
+                <p:inputText id="FileName" style="opacity: 1; background-color: #dddddd;" value="#{recordsController.name}" readonly="true"></p:inputText>
 
                 <h:outputLabel for="status" value="Status "/>
                 <p:inputText id="status" style="opacity: 1; background-color: #dddddd;" value="#{recordsController.status}" readonly="true"></p:inputText>
@@ -44,7 +44,7 @@
                 <f:facet name="header" >
                     Results 
                 </f:facet>
-                <p:column headerText="File Id" resizable="true" width="10%" >
+                <p:column headerText="Record Id" resizable="true" width="10%" >
                     <h:outputText value="#{filerecords.file_line}" />
                 </p:column>
                 <p:column headerText="Error Type" resizable="true" width="20%" >
