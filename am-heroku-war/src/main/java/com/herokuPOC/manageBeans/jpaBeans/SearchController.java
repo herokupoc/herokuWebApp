@@ -6,6 +6,7 @@
 package com.herokuPOC.manageBeans.jpaBeans;
 
 import com.herokuPOC.entity.FileContainer;
+import com.herokuPOC.entity.OrgEncoding;
 import com.herokuPOC.entity.User;
 import com.herokuPOC.services.ContainerManager;
 import java.io.BufferedReader;
@@ -14,9 +15,11 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -40,7 +43,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 @ViewScoped
 public class SearchController implements Serializable{
 
-    
     @EJB 
     private ContainerManager fileContainerEJB;
     
@@ -48,6 +50,7 @@ public class SearchController implements Serializable{
        
     private List<FileContainer> filesFromDb = new ArrayList<>() ; 
     private List<String> statusList = new ArrayList<>();
+    private List<OrgEncoding> orgList = new ArrayList<>();
     private String organization = null;    
     private String userName = us.getUserName();    
     private String container = "Contact";
@@ -72,12 +75,26 @@ public class SearchController implements Serializable{
     public List<String> getStatusList() {
         statusList.clear();
         statusList.add("PENDING");
-        statusList.add("COMPLETED");
-        statusList.add("ERROR");
+        statusList.add("LOADED");
+        statusList.add("VALIDATED");
         
         return statusList;
     }
+    
+     public List<OrgEncoding> getOrgList() {
+        orgList = fileContainerEJB.findAllOrg();
+        
+        return orgList;
+    }
 
+     /**
+     * @param orgList the orgList to set
+     */
+    public void setOrgList(List<OrgEncoding> orgList) {
+        this.orgList = orgList;
+    }
+
+    
     /**
      * @param statusList the statusList to set
      */
@@ -242,8 +259,13 @@ public class SearchController implements Serializable{
 
     
     public void SearchFiles() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        
         try {
-            filesFromDb = fileContainerEJB.findAllFileContainer();        
+            //filesFromDb = fileContainerEJB.findAllFileContainer(); 
+            filesFromDb = fileContainerEJB.findFileContainerByCriteria(params.get("formFile:state_input"), params.get("formFile:orgs_input"), params.get("formFile:calStart_input"), params.get("formFile:calEnd_input"));
+            
         } catch (Exception e) {
             System.out.println("com.herokuPOC.manageBeans.jpaBeans.SearchController.SearchFiles()");
         
@@ -293,4 +315,15 @@ public class SearchController implements Serializable{
         }
     }
     
+    
+     //get value from "f:param"
+    public String getSearchParams(FacesContext fc) {
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        //setFileName("test");
+        //setNbRecordsError("1");
+        //formFile:state_input
+        
+        return params.get("formFile:grid_selection");
+
+    }
 }
