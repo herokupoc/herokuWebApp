@@ -18,7 +18,7 @@
 
 
                 <h:outputLabel for="FileName" value="File Name " />
-                <p:inputText id="FileName" style="opacity: 1; background-color: #dddddd;" value="#{searchController.organization}" readonly="true"></p:inputText>
+                <p:inputText id="FileName" style="opacity: 1; background-color: #dddddd;" value="#{recordsController.fileName}" readonly="true"></p:inputText>
 
                 <h:outputLabel for="status" value="Status "/>
                 <p:inputText id="status" style="opacity: 1; background-color: #dddddd;" value="#{searchController.organization}" readonly="true"></p:inputText>
@@ -44,26 +44,40 @@
                 <p:column headerText="File Id" resizable="true" width="10%" >
                     <h:outputText value="#{filerecords.file_line}" />
                 </p:column>
-                <p:column headerText="Error Message" resizable="true" width="20%" filterBy="#{filerecords.err_msg}">
+                <p:column headerText="Error Type" resizable="true" width="20%" >
+                    <h:outputText value="#{filerecords.err_type}" />
+                </p:column>
+                <p:column headerText="Error Message" resizable="true" width="20%" >
                     <h:outputText value="#{filerecords.err_msg}" />
+                </p:column>  
+                <p:column headerText="Account Segmentation" resizable="true" width="15%" >
+                    <h:outputText value="#{filerecords.account_segmentation}" />
+                </p:column>                                              
+                <p:column headerText="Salutation" resizable="true" width="15%" >
+                    <h:outputText value="#{filerecords.salutation}" />
                 </p:column>
-                <p:column headerText="account flag" resizable="true" width="15%" >
-                    <h:outputText value="#{filerecords.account_flag}" />
-                </p:column>
-                <p:column headerText="firstname" resizable="true" width="15%" filterBy="#{filerecords.firstname}">
+                <p:column headerText="First name" resizable="true" width="15%" filterBy="#{filerecords.firstname}">
                     <h:outputText value="#{filerecords.firstname}" />
                 </p:column>
-                <p:column headerText="lastname" resizable="true" width="15%" >
+                <p:column headerText="Last Name" resizable="true" width="15%" filterBy="#{filerecords.firstname}">
                     <h:outputText value="#{filerecords.lastname}" />
                 </p:column>
-                <p:column headerText="sfcontact id" resizable="true" width="15%" >
+                <p:column headerText="Email" resizable="true" width="15%" filterBy="#{filerecords.firstname}">
+                    <h:outputText value="#{filerecords.mail}" />
+                </p:column>
+                <p:column headerText="Mobile Phone" resizable="true" width="15%" >
+                    <h:outputText value="#{filerecords.cellular}" />
+                </p:column>
+                <p:column headerText="SF Contact ID" resizable="true" width="15%" >
                     <h:outputText value="#{filerecords.sfcontact_id}" />
                 </p:column>
-               <!--
-                <p:column headerText="last Updated" resizable="true" width="20%" >
-                    <h:outputText value="#{filerecords.lastUpdated}" />
+                <p:column headerText="SF Account ID" resizable="true" width="15%" >
+                    <h:outputText value="#{filerecords.sfaccount_id}" />
                 </p:column>
--->
+                <p:column headerText="Status Synch SF" resizable="true" width="15%" >
+                     <h:outputText value="#{filerecords.flagto_sf}" />
+                </p:column>                                              
+               
             </p:dataTable>
 
         </h:form>
