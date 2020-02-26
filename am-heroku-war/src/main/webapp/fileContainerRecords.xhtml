@@ -37,12 +37,12 @@
 
             </h:panelGrid>
 
-            <p:dataTable id="grid" resizableColumns="true" var="filerecords" value="#{recordsController.recordsList}" selectionMode="single" rowKey="#{filerecords.file_id}" >
+            <p:dataTable id="grid" resizableColumns="true" var="filerecords" value="#{recordsController.recordsList}" selectionMode="single" rowKey="#{filerecords.file_line}" >
                 <f:facet name="header" >
                     Results 
                 </f:facet>
                 <p:column headerText="File Id" resizable="true" width="10%" >
-                    <h:outputText value="#{filerecords.file_id}" />
+                    <h:outputText value="#{filerecords.file_line}" />
                 </p:column>
                 <p:column headerText="Error Message" resizable="true" width="20%" filterBy="#{filerecords.err_msg}">
                     <h:outputText value="#{filerecords.err_msg}" />
