@@ -189,7 +189,7 @@ public class StorageManager {
                 recordToDb.setMail(arrOfStr[17]);
                 recordToDb.setCellular(arrOfStr[13]);
                 recordToDb.setAccount_segmentation(arrOfStr[22]);
-                recordToDb.setSfowner_id(arrOfStr[23]);
+                recordToDb.setSfaccount_id(arrOfStr[23]);
                 recordToDb.setSfowner_id(arrOfStr[24]);
                 recordToDb.setFileContainer(fileContainer);
                 
