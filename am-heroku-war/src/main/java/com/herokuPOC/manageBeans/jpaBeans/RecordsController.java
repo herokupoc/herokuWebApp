@@ -243,7 +243,7 @@ public class RecordsController implements Serializable {
             setRecordsList(recordEJB.recordsFromFileId(fileIdSelection));
             
             if(this.recordsList.isEmpty()){
-                 RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "Cant find results for this file!!"));
+                 RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "There is no records for this file!!"));
                  return "searchFileResults";
             }
             
