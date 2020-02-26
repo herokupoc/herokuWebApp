@@ -116,6 +116,7 @@ public class FileUploadBean {
         } catch (Exception ex) {
             RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message", "Error Uploading File!"));
             Logger.getLogger(FileUploadBean.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
         return;

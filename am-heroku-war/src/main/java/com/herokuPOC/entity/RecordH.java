@@ -36,7 +36,7 @@ public class RecordH implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(columnDefinition = "serial")
-	private Integer file_id;
+	private Integer recordId;
 	private Integer file_line;
 	
 	private String err_type;
@@ -81,13 +81,16 @@ public class RecordH implements Serializable {
 	}
 
 
-	public Integer getFile_id() {
-		return file_id;
+	
+
+
+	public Integer getRecordId() {
+		return recordId;
 	}
 
 
-	public void setFile_id(Integer file_id) {
-		this.file_id = file_id;
+	public void setRecordId(Integer recordId) {
+		this.recordId = recordId;
 	}
 
 
