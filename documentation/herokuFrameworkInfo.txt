@@ -28,7 +28,7 @@ How to Startt Collaborating in this project:
 		>git checkout --track origin/uat
 		>git checkout --track origin/dev
 		
-	Create a remote to heroku 
+	Create a remote to herokuu 
 		>heroku git:remote -a pocherokudev
 		
 	Verify thatt you have a remote branch in your local git: 
