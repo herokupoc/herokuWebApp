@@ -5,7 +5,7 @@
 	<artifactId>herokuPOC-Parent</artifactId>
 	<version>1.0</version>
 	<name>herokuPOC-Parent</name>
-	<url>http://maven.apache.org</url>
+	<url>https://maven.apache.org</url>
 	<packaging>pom</packaging>
 
 	

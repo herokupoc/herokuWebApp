@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-
+<!--
   <Resource id="heroku" type="javax.sql.DataSource">
 		jdbcDriver=org.postgresql.Driver
 		password=8b0a0dbf031e223b7d038fc22c78afde8d5e0896c774790f7a8e81c6da7d6814
@@ -10,5 +10,15 @@
 		sslfactory=org.postgresql.ssl.NonValidatingFactory
 		
 	</Resource>
+        
+        -->
+        
+          <Resource id="heroku" type="javax.sql.DataSource">
+		jdbcDriver=org.postgresql.Driver
+		password=admin
+		userName=postgres
+		jdbcUrl=jdbc:postgresql://localhost:5432/postgres
+	</Resource>
+        
 </resources>
 
