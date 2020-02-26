@@ -58,6 +58,8 @@ public class RecordH implements Serializable {
         private String account_segmentation;
         private String validated;
         private String flagto_sf;
+        private String sfaccount_id;
+        private String sfowner_id;
         
         
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -281,4 +283,36 @@ public class RecordH implements Serializable {
         this.flagto_sf = flagto_sf;
     }
 
+        /**
+     * @return the sfowner_id
+     */
+    public String getSfowner_id() {
+        return sfowner_id;
+    }
+
+    /**
+     * @param sfowner_id the sfowner_id to set
+     */
+    public void setSfowner_id(String sfowner_id) {
+        this.sfowner_id = sfowner_id;
+    }
+    
+    
+    
+    
+    /**
+     * @return the sfaccount_id
+     */
+    public String getSfaccount_id() {
+        return sfaccount_id;
+    }
+
+    /**
+     * @param sfaccount_id the sfaccount_id to set
+     */
+    public void setSfaccount_id(String sfaccount_id) {
+        this.sfaccount_id = sfaccount_id;
+    }
+
+    
 }

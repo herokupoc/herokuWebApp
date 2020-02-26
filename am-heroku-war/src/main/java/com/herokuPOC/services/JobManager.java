@@ -7,6 +7,8 @@ package com.herokuPOC.services;
 
 import com.herokuPOC.entity.FileContainer;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +100,7 @@ public class JobManager {
            Boolean out = (Boolean)storedProcedure.getOutputParameterValue(2);
            
            System.out.println("out : " + out.toString());                     
-                
+ 
        } catch (IllegalArgumentException | IllegalStateException | java.lang.ClassCastException iae){
            // send email to central team
            String body = "Error on process: checkdataintegrity " + "JOB3" + "\n";
@@ -110,7 +112,7 @@ public class JobManager {
     }
     
     public void executeJob2(){ 
-       try{
+       try{                    
             StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("public.integratedata_sf");
          // set parameters
            storedProcedure.registerStoredProcedureParameter(1, Boolean.class, ParameterMode.OUT);
