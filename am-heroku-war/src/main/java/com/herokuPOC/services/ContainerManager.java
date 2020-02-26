@@ -116,7 +116,8 @@ public class ContainerManager {
     }
     public void createFileContainer(FileContainer fileContainer){
         //em.getTransaction().begin();  
-        em.persist(fileContainer);       
+        em.persist(fileContainer);          
+        //em.flush();
         //em.getTransaction().commit();  
     }
 
