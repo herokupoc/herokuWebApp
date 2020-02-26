@@ -198,7 +198,7 @@ public class ContainerManager {
         List<RecordH> recordsList = new ArrayList<>();
         try {
             
-            recordListQuery = "SELECT h from RecordH h where filecontainerid = :fileid ";
+            recordListQuery = "SELECT h from RecordH h where file_id = :fileid ";
             Query query = em.createQuery(recordListQuery);
             query.setParameter("fileid", Integer.valueOf(fileId));
             
