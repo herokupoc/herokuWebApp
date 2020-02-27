@@ -24,9 +24,8 @@ public class Job3Worker {
     static HttpGet request ;
     static HttpResponse response ;
     
-    public static void main(String[] args) throws ClientProtocolException,IOException{
-        
-    	/*
+    public static void main(String[] args) throws ClientProtocolException,IOException{        
+    	
 	    client = new DefaultHttpClient();
 	    request = new HttpGet(System.getenv("JOB_API_URI")+"/webresources/job/3");
 	    response = client.execute(request);
@@ -35,7 +34,7 @@ public class Job3Worker {
 	    while ((line = rd.readLine()) != null) {
 	      System.out.println(line);
 	    }
-	    */
+	    
     	System.out.print("Ejecutando Job3");
         
     }
