@@ -18,23 +18,26 @@ import org.apache.http.impl.client.DefaultHttpClient;
  *
  * @author ferreirai
  */
-public class Job2Worker {  
-    
-    static HttpClient client ;
-    static HttpGet request ;
-    static HttpResponse response ;
-    
-    public static void main(String[] args) throws ClientProtocolException,IOException{
-        
-    client = new DefaultHttpClient();
-    request = new HttpGet(System.getenv("JOB_API_URI")+"/job/2");
-    response = client.execute(request);
-    BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
-    String line = "";
-    while ((line = rd.readLine()) != null) {
-      System.out.println(line);
-    }
-        
-    }
-    
+public class Job2Worker {
+
+	static HttpClient client;
+	static HttpGet request;
+	static HttpResponse response;
+
+	public static void main(String[] args) throws ClientProtocolException, IOException {
+
+		/*
+		client = new DefaultHttpClient();
+		request = new HttpGet(System.getenv("JOB_API_URI") + "/job/2");
+		response = client.execute(request);
+		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		String line = "";
+		while ((line = rd.readLine()) != null) {
+			System.out.println(line);
+		}
+		*/
+		System.out.print("Ejecutando Job3");
+
+	}
+
 }
