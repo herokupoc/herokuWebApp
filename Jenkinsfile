@@ -3,7 +3,7 @@ node {
 
 	stage ('build-app')
 	{     
-		echo 'Running build-app'
+		echo 'Running build-app2'
 		
 		echo 'scm_path parameter =' + branch
 		
