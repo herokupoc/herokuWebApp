@@ -58,7 +58,7 @@
                 <p:outputLabel value="#{file.record_qty}"/>    
             </p:dataGrid>-->
 
-            <p:dataTable id="grid" resizableColumns="true" var="filecontainer" value="#{searchController.filesFromDb}" selectionMode="single" selection="#{searchController.selectedFile}" rowKey="#{filecontainer.id}" >
+            <p:dataTable id="grid" resizableColumns="true" var="filecontainer" value="#{searchController.filesFromDb}" selectionMode="single" selection="#{searchController.selectedFile}" rowKey="#{filecontainer.id}" paginator="true" rows="10">
                 <f:facet name="header" >
                     Results 
                 </f:facet>

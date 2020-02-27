@@ -40,7 +40,7 @@
 
             </h:panelGrid>
 
-            <p:dataTable id="grid" resizableColumns="true" var="filerecords" value="#{recordsController.recordsList}" selectionMode="single" rowKey="#{filerecords.file_line}" >
+            <p:dataTable id="grid" resizableColumns="true" var="filerecords" value="#{recordsController.recordsList}" selectionMode="single" rowKey="#{filerecords.file_line}" paginator="true" rows="10">
                 <f:facet name="header" >
                     Results 
                 </f:facet>
