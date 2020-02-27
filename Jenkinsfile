@@ -19,17 +19,16 @@ node {
 		echo 'Commit message: ' + commitMessage
 		currentBuild.description  = commitMessage
 		
-		
-		   
-		
 				   
 		setMavenThreeAndJavaSeven()  
+		
+		bat 'mvn clean package'
 		   
 		
-		bat "zip -D -r src.zip src/ pom.xml"
 		
 		
-		bat 'svn copy  --non-interactive -m "branch the current software" http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' http://ncecvsmad02/scm/svn/amadeus/gda-online-2/branches/R' + env.BUILD_NUMBER	
+		
+		
 		
 	}
 
