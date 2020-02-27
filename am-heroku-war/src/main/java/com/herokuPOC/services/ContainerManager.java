@@ -10,7 +10,6 @@ import com.herokuPOC.entity.OrgEncoding;
 import com.herokuPOC.entity.Record;
 import com.herokuPOC.entity.RecordH;
 import com.herokuPOC.entity.User;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,7 +92,7 @@ public class ContainerManager {
       FileContainer fileContainerTemp = em.find(FileContainer.class, fileContainer.getId());
       
       //em.getTransaction().begin();
-      fileContainerTemp.setLoad_status("LOADED");
+      fileContainerTemp.setLoad_status("VALIDATED");
       em.persist(fileContainerTemp);       
       //em.getTransaction().commit();
       
