@@ -32,9 +32,10 @@ public class ContainerManager {
 
     @PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
     private EntityManager em;
-
+    
     @EJB
-    private MailManager mailManager;
+    private MailManager mailManager; 
+
     
     public void insertContainer(){ 
     	
@@ -46,9 +47,9 @@ public class ContainerManager {
         User user = null;
         String userFromDb;
         
-        
-      
-        try {            
+       try{
+  
+            
             userFromDb = "SELECT u from User u where username = :name and organization= :org ";
             Query query = em.createQuery(userFromDb);
             query.setParameter("name", us.getUserName());

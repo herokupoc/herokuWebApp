@@ -36,7 +36,7 @@ How to Startt Collaborating in this project:
 	
 	Rename your remote to have more clarity: 
 		>git remote rename heroku heroku-[dev|uat|prod]
-	
+	ss
 	Do some change in order to test that everything works properly(Example modify Menu.xhtml) Push to heroku: 
 		>git push //To push to github dev remote, the baseline that share our work
 		>git push heroku dev:master
@@ -55,6 +55,9 @@ How to makee a change to the project:
 Jobs:
 	Create the app worker3
 	heroku create worker3 --no-remote
-	heroku deploy:jar target\am-heroku-job3-jar-with-dependencies.jar --app worker3
+	heroku deploy:jar target\am-heroku-job3-jar-with-dependencies.jar --app worker3dev
+	
+	heroku create worker2 --no-remote
+	heroku deploy:jar target\am-heroku-job2-jar-with-dependencies.jar --app worker2dev
 	
 	 

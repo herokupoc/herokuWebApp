@@ -39,7 +39,7 @@ public class JobManager {
     @EJB
     private ContainerManager fileUploadFacade;
     @EJB
-    private MailManager mailManager;
+    private MailManager mailManager; 
 
  
     public void executeJob1(){ 

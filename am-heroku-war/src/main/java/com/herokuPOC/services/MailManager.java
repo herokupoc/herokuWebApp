@@ -6,6 +6,8 @@
 package com.herokuPOC.services;
 
 
+import java.io.IOException;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,7 +28,6 @@ public class MailManager {
      @PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
     private EntityManager em;
      
-        @EJB
     private ContainerManager fileUploadFacade;
      
         
@@ -43,6 +44,7 @@ public class MailManager {
         .text(body)
         .build()
         .send();       
+       
     }
             
     public void sendMail2CentralTeam(String from, String subject,String body){
@@ -60,7 +62,7 @@ public class MailManager {
         .text(body)
         .build()
         .send();  
-*/            
+           
     }
     
     
@@ -83,6 +85,7 @@ public class MailManager {
            //User us = (User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
            
        } catch (IllegalArgumentException | IllegalStateException iae){
+    	   iae.printStackTrace();
           // send email to central teamsendEmail("inacio.ferreira@cgi.com","inacio.ferreira@cgi.com","subject","body");
        }
         return out;
