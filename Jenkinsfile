@@ -13,7 +13,7 @@ node {
 		
 		git branch: 'dev', credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
 		
-		bat 'git log -1 1 C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp' > commit.txt
+		bat 'git log -1' > commit.txt
 		
 		
 		commitMessage = readFile 'commit.txt'
