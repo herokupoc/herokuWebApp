@@ -21,7 +21,7 @@ node {
 		currentBuild.description  = commitMessage
 		
 				   
-		setMavenThreeAndJavaSeven()  
+		setMavenThreeAndJavaEight()  
 		
 		
 	}
