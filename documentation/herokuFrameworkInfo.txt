@@ -36,7 +36,7 @@ How to Startt Collaborating in this project:
 	
 	Rename your remote to have more clarity: 
 		>git remote rename heroku heroku-[dev|uat|prod]
-	
+	s
 	Do some change in order to test that everything works properly(Example modify Menu.xhtml) Push to heroku: 
 		>git push //To push to github dev remote, the baseline that share our work
 		>git push heroku dev:master
