@@ -49,8 +49,7 @@ public class ContainerManager {
         String userFromDb;
         
         try {
-        	
-        	mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp", "XXXXX");
+  
             
             userFromDb = "SELECT u from User u where username = :name and organization= :org ";
             Query query = em.createQuery(userFromDb);

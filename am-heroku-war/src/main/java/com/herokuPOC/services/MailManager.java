@@ -126,9 +126,9 @@ public class MailManager {
     public String getCentralTeamEmail(){
         String out = null;
         try{
-        	out = "ignacio.ramos@amadeus.com";
         	
-        	/*
+        	
+        	
             StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("util.get_t_util_header_lookup");
          // set parameters
            storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
@@ -141,10 +141,11 @@ public class MailManager {
 
            System.out.println("out : " + out);
            
-           */
+           
            //User us = (User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
            
        } catch (IllegalArgumentException | IllegalStateException iae){
+    	   iae.printStackTrace();
           // send email to central teamsendEmail("inacio.ferreira@cgi.com","inacio.ferreira@cgi.com","subject","body");
        }
         return out;
