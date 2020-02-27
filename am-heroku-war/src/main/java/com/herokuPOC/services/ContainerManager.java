@@ -17,6 +17,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.persistence.EntityManager;
@@ -31,6 +33,9 @@ public class ContainerManager {
 
     @PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
     private EntityManager em;
+    
+    @EJB
+    private MailManager mailManager; 
 
     
     public void insertContainer(){ 
@@ -51,6 +56,8 @@ public class ContainerManager {
             query.setParameter("org", us.getOrganization());
             
             List<User> userList = query.getResultList();
+            
+            mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp", "XXXXX");
             
             if(!userList.isEmpty()){
                 user = userList.get(0);
