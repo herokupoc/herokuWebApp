@@ -13,7 +13,6 @@ node {
 		
 		git branch: 'dev', credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
 		
-		bat 'git log -1 1 http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' > commit.txt'
 		
 		commitMessage = readFile 'commit.txt'
 		echo 'Commit message: ' + commitMessage
