@@ -13,6 +13,8 @@ node {
 		
 		git branch: 'dev', credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
 		
+		bat 'git log -1 1 C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp' > commit.txt
+		
 		
 		commitMessage = readFile 'commit.txt'
 		echo 'Commit message: ' + commitMessage
@@ -21,7 +23,7 @@ node {
 				   
 		setMavenThreeAndJavaSeven()  
 		
-		bat 'mvn clean package'
+		
 		   
 		
 		
