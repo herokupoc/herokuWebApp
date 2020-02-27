@@ -16,7 +16,7 @@ node {
 		
 		
 		commitMessage = readFile 'commit.txt'
-		echo 'Commit message: ' + commitMessage
+		echo "Commit message: " + commitMessage
 		currentBuild.description  = commitMessage
 		
 				   
