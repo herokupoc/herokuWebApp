@@ -12,7 +12,7 @@ node {
 		
 		git branch: 'dev', credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
 		
-		bat 'git log -1' > lastCommit.txt
+		bat 'git log -1 > lastCommit.txt'
 		
 		
 		
