@@ -2,7 +2,26 @@ node {
 	
 	stage ('build-app')
 	{     
+		echo 'Running build-app4'
 		
+		echo 'scm_path parameter =' + branch
+		
+		
+		currentBuild.displayName = currentBuild.number + ' - ' + branch
+		
+		
+		git branch: 'dev', credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
+		
+		bat 'git log -1' > commit.txt
+		
+		
+		
+		def commitMessage = readFile file: 'commit.txt'
+		echo "Commit message: " + commitMessage
+		currentBuild.description  = commitMessage
+		
+				   
+		setMavenThreeAndJavaSeven()  
 		
 		
 	}
