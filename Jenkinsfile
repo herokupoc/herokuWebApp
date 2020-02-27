@@ -2,7 +2,7 @@ node {
 	
 	stage ('build-app')
 	{     
-		echo 'Running build-app4'
+		echo 'Running build-app5'
 		
 		echo 'scm_path parameter =' + branch
 		
@@ -18,7 +18,7 @@ node {
 		
 		
 				   
-		setMavenThreeAndJavaSeven()  
+		
 		
 		
 	}
