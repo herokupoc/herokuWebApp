@@ -6,6 +6,8 @@
 package com.herokuPOC.services;
 
 
+import java.io.IOException;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,7 +31,7 @@ public class MailManager {
     
         
     public void sendMail2User(String from,  String subject,String body){
-/*        
+       
         // Create a trust manager that does not validate certificate chains
         TrustManager[] trustAllCerts = new TrustManager[] { 
             new X509TrustManager() {     
@@ -77,17 +79,21 @@ public class MailManager {
         } catch (IOException ex) {
           System.out.println("ERRRO: \n" + ex.getLocalizedMessage() );
         }
-        */
+       
     }
             
     public void sendMail2CentralTeam(String from, String subject,String body){
-        /*
+       
         String centralteamEmail = getCentralTeamEmail();
         Email fromNew = new Email(from);
         String subjectNew = subject;
         Email toNew = new Email(centralteamEmail);
         Content content = new Content("text/plain", body);
         Mail mail = new Mail(fromNew, subjectNew, toNew, content);
+        
+        System.out.println("from: " + from);
+        System.out.println("subject: " + subject);
+        System.out.println("centralteamEmail: " + centralteamEmail);
 
         SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
         Request request = new Request();
@@ -100,9 +106,9 @@ public class MailManager {
           System.out.println(response.body);
           System.out.println(response.headers);
         } catch (IOException ex) {
-          
+        	ex.printStackTrace();
         }
-        */
+       
     }
     
     
