@@ -11,7 +11,7 @@ node {
 		currentBuild.displayName = currentBuild.number + ' - ' + branch
 		
 		
-		bat 'git checkout scm'
+		git branch: 'dev', credentialsId: 'ignramgar', url: 'https://github.com/herokupoc/herokuWebApp.git'
 		
 		bat 'git log -1 1 http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' > commit.txt'
 		
