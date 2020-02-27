@@ -15,9 +15,7 @@ node {
 		bat 'git log -1' > commit.txt
 		
 		
-		def commitMessage = readFile 'commit.txt'
-		echo "Commit message: " + commitMessage
-		currentBuild.description  = commitMessage
+		
 		
 				   
 		setMavenThreeAndJavaSeven()  
