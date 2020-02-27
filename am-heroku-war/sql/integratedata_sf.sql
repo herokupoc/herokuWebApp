@@ -154,7 +154,7 @@ Begin
 		
 	--itereation for file containers
 	update public.filecontainer 
-	set load_status ='VALIDATED', record_err_qty = qty_err_rec, sf_qty_record_sync = qty_sync_rec 
+	set load_status ='LOADED', record_err_qty = qty_err_rec, sf_qty_record_sync = qty_sync_rec 
 	where id = rec.filecontainerid;
 		
 	qty_err_rec:=0;
