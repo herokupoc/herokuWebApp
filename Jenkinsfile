@@ -7,11 +7,14 @@ node {
 		
 		echo 'scm_path parameter =' + branch
 		
-		tempScmVariable= branch
+		
+		currentBuild.displayName = currentBuild.number + ' - ' + branch
 		
 		
-		currentBuild.displayName = currentBuild.number + ' - ' + scm_path
-		bat 'svn log -l 1 http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' > commit.txt'
+		bat 'git checkout scm'
+		
+		bat 'git log -1 1 http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' > commit.txt'
+		
 		commitMessage = readFile 'commit.txt'
 		echo 'Commit message: ' + commitMessage
 		currentBuild.description  = commitMessage
