@@ -5,14 +5,10 @@ node {
 	{     
 		echo 'Running build-app'
 		
-		echo 'scm_path parameter =' + scm_path
+		echo 'scm_path parameter =' + branch
 		
-		tempScmVariable= scm_path
+		tempScmVariable= branch
 		
-		if (scm_path == 'javaeightdev') {
-			scm_path = 'development'
-		}
-		echo 'scm_path evaluated =' + scm_path
 		
 		currentBuild.displayName = currentBuild.number + ' - ' + scm_path
 		bat 'svn log -l 1 http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' > commit.txt'
