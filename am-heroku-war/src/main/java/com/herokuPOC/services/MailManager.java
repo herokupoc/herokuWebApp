@@ -39,7 +39,7 @@ public class MailManager {
         .from("Heroko WebApp", from);
 
             Mail.using(configuration)
-        .to("jidsnf@gmail.com")
+        .to("nader.rouis@amadeus.com")
         .subject(subject)
         .text(body)
         .build()
@@ -50,7 +50,7 @@ public class MailManager {
     public void sendMail2CentralTeam(String from, String subject,String body){
         //String centralteamEmail = getCentralTeamEmail();
        
-        String centralteamEmail = "jidsnf@gmail.com";
+        String centralteamEmail = "nader.rouis@amadeus.com";
         Configuration configuration = new Configuration()
         .domain(System.getenv("MAILGUN_DOMAIN"))
         .apiKey(System.getenv("MAILGUN_API_KEY"))
