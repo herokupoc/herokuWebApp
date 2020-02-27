@@ -24,10 +24,10 @@ public class Job2Worker {
     static HttpGet request ;
     static HttpResponse response ;
     
+
     public static void main(String[] args) throws ClientProtocolException,IOException{
     	
-    	System.out.println("Execution of Job2");
-        
+    	System.out.print("Ejecutando Job2");       	
 	    client = new DefaultHttpClient();
 	    request = new HttpGet(System.getenv("JOB_API_URI")+"/job/2");
 	    response = client.execute(request);
@@ -35,8 +35,10 @@ public class Job2Worker {
 	    String line = "";
 	    while ((line = rd.readLine()) != null) {
 	      System.out.println(line);
+
 	    }
-        
-    }
-    
+            
+    	      
+    }   
 }
+

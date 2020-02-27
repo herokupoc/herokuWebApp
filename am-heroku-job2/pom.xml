@@ -44,7 +44,11 @@
 		      <configuration>
 		        <archive>
 		          <manifest>
+<<<<<<< HEAD
 		            <mainClass>com.herokuPOC.job.Job2Worker</mainClass>
+=======
+		            <mainClass>com.herokuPOC.webservices.client.Job2Worker</mainClass>
+>>>>>>> e97bf286c270d5903a4dea62e77b805113d6d69d
 		          </manifest>
 		        </archive>
 		        <descriptorRefs>
