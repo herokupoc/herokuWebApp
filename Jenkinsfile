@@ -11,7 +11,7 @@ node {
 		currentBuild.displayName = currentBuild.number + ' - ' + branch
 		
 		
-		git branch: 'dev', credentialsId: 'ignramgar', url: 'https://github.com/herokupoc/herokuWebApp.git'
+		git branch: 'dev', credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
 		
 		bat 'git log -1 1 http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' > commit.txt'
 		
@@ -19,22 +19,15 @@ node {
 		echo 'Commit message: ' + commitMessage
 		currentBuild.description  = commitMessage
 		
-		if(revision.length()>0) {
-			checkout([$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: '51106c7d-3cda-4be9-a9e9-84ebf8b1bc58', depthOption: 'infinity', ignoreExternalsOption: true, local: '.', remote: 'http://ncecvsmad02/scm/svn/amadeus/gda-online-2/'+scm_path+'${revision}']], workspaceUpdater: [$class: 'CheckoutUpdater']])
-		} else {
-			checkout([$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: '51106c7d-3cda-4be9-a9e9-84ebf8b1bc58', depthOption: 'infinity', ignoreExternalsOption: true, local: '.', remote: 'http://ncecvsmad02/scm/svn/amadeus/gda-online-2/'+scm_path]], workspaceUpdater: [$class: 'CheckoutUpdater']])	
-		}
+		
 		   
-		env.SCM_REVISION = revision.replaceAll("@","")
-		echo 'Revision number:' + env.SCM_REVISION
-		//${env.SCM_REVISION}
+		
 				   
 		setMavenThreeAndJavaSeven()  
 		   
-		bat 'mvn clean package -Penv-dev versions:set -DnewVersion=${env.BUILD_NUMBER}'
+		
 		bat "zip -D -r src.zip src/ pom.xml"
-		//Archive artifact to be used later.
-		archive "src.zip"    
+		
 		
 		bat 'svn copy  --non-interactive -m "branch the current software" http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' http://ncecvsmad02/scm/svn/amadeus/gda-online-2/branches/R' + env.BUILD_NUMBER	
 		
