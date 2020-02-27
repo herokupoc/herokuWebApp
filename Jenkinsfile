@@ -15,7 +15,7 @@ node {
 		bat 'git log -1' > commit.txt
 		
 		
-		commitMessage = readFile 'commit.txt'
+		def commitMessage = readFile 'commit.txt'
 		echo "Commit message: " + commitMessage
 		currentBuild.description  = commitMessage
 		
