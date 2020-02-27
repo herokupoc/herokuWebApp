@@ -6,8 +6,9 @@
 package com.herokuPOC.services;
 
 import com.herokuPOC.entity.FileContainer;
-import com.herokuPOC.entity.MailStore;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
 
 
@@ -36,15 +38,16 @@ public class JobManager {
     private StorageManager storageManager; 
     @EJB
     private ContainerManager fileUploadFacade;
-    
+
+  
     
     public void executeJob1(){ 
         
+        
+        //String body1 = "The file " + "Test" +" was validated and can be checked for errors in the records.\n";
+         //                   mailManager.sendMail2User("general@amadeus.com", "Amadeus POC - File validated: " + "Test", body1);
+        
         listFromDb = new ArrayList<>();
-        // verify all the FileContainers that where validated and need sending the email.
-        //listFromDb = fileUploadFacade.findAllUploadedToDb();
-        // for each send an email
-        //boolean update = fileUploadFacade.update(fileContainer);
         
         // get all the FileContainer that need to be brought from AWS Storage and inserted into the database
         listFromDb = fileUploadFacade.findAllUploadedToDb();
@@ -59,51 +62,107 @@ public class JobManager {
                 try {
                     // call the class that reads all the records from the Amazon S3 stored file and stores them onto the database
                     success = storageManager.getRecordsFromFile(date,fileName,fileContainer);
+                    if (success) {
+                        // calls the Stored procedure to validate the data integrity
+                        boolean integrityDone = checkDataIntegrity(fileContainer.getId());
+                        // update the Container File Status to LOADED 
+                        boolean update = fileUploadFacade.update(fileContainer);
+                        if(integrityDone && update) {
+                            // send email to the user saying that the file is vailable for searching in the webapp
+                            String body = "The file " + fileName +" was validated and can be checked for errors in the records.\n";
+                            //mailManager.sendMail2User("general@amadeus.com", "Amadeus POC - File validated: " + fileName, body);
+                        }
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(StorageManager.class.getName()).log(Level.SEVERE, null, ex);
+                    // send email to central team
+                    String body = "Error on process:" + "JOB3\n";
+                    body = body + ex.getLocalizedMessage();
+                    //mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
                 }
                 if (success) {
                     // call the PostGreSQL function to validate
-                    //boolean update = fileUploadFacade.update(fileContainer);
-                    
+                    boolean update = fileUploadFacade.update(fileContainer);                    
                 }
             });
-        } 
-        
+        }         
+        System.out.println("ENDED JOB 2");
+    }
+    
+    public boolean checkDataIntegrity(int fileContainerId){
+        boolean bReturn = true;
+        try{
+            StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("public.checkdataintegrity");
+         // set parameters
+           storedProcedure.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
+           storedProcedure.registerStoredProcedureParameter(2, Boolean.class, ParameterMode.OUT);
+           storedProcedure.setParameter(1, fileContainerId);
+           Boolean out = (Boolean)storedProcedure.getOutputParameterValue(2);
+           
+           System.out.println("out : " + out.toString());                     
  
-        System.out.println("CHAMEI O JOB 2");
+       } catch (IllegalArgumentException | IllegalStateException | java.lang.ClassCastException iae){
+           // send email to central team
+           String body = "Error on process: checkdataintegrity " + "JOB3" + "\n";
+           body = body + iae.getLocalizedMessage();
+           //mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
+           bReturn = false;           
+       }
+        return bReturn;
     }
     
     public void executeJob2(){ 
-       
-         StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("public.test");
-    // set parameters
-      storedProcedure.registerStoredProcedureParameter("var", String.class, ParameterMode.IN);
-      storedProcedure.registerStoredProcedureParameter("var", String.class, ParameterMode.OUT);
-      storedProcedure.setParameter( "var","FODASSE");
-      storedProcedure.executeUpdate();
+       try{                    
+            StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("public.integratedata_sf");
+         // set parameters
+           storedProcedure.registerStoredProcedureParameter(1, Boolean.class, ParameterMode.OUT);
+ 
+           Boolean out = (Boolean)storedProcedure.getOutputParameterValue(1);
 
-      String objectList = (String)storedProcedure.getSingleResult();
-      System.out.println("objectList : " + objectList);
-      //for (int i = 0; i< objectList.size(); i++) {
-          //Account currAccount = new Account ((Object[]) objectList.get(i));
-          //tmpList.add(currAccount);
-         // System.out.println("currAccount : " + currAccount.toString()); 
-    
-      //}
-        
+           System.out.println("integratedata_sf output : " + out.toString());                     
+          
+       } catch (IllegalArgumentException | IllegalStateException iae){
+           // send email to central team
+           String body = "Error on process: integratedata_sf " + "JOB3" + "\n";
+           body = body + iae.getLocalizedMessage();
+           //mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
+          
+       }       
     }
-    
+    /*
     public void sendEmail(String from, String to, String subject,String body){
-        em.getTransaction().begin();
+        //em.getTransaction().begin();
         MailStore mailStore = new MailStore();
         mailStore.setSendTo(to);
         mailStore.setSentFrom(from);
         mailStore.setSubject(subject);
         mailStore.setBody(body);
         em.persist(mailStore);
-        em.getTransaction().commit();
+        //em.getTransaction().commit();
     }
     
-    
+    public String getCentralTeamEmail(){
+        String out = null;
+        try{
+            StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("util.get_t_util_header_lookup");
+         // set parameters
+           storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
+		   storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
+           storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.OUT);
+           storedProcedure.setParameter( 1,"CENTRAL_TEAM_EMAIL");
+		   storedProcedure.setParameter( 2,"online");
+
+           out = (String)storedProcedure.getOutputParameterValue(3);
+
+           System.out.println("out : " + out);
+           
+           
+           //User us = (User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+           
+       } catch (IllegalArgumentException | IllegalStateException iae){
+          // send email to central teamsendEmail("inacio.ferreira@cgi.com","inacio.ferreira@cgi.com","subject","body");
+       }
+        return out;
+    }
+*/
 }

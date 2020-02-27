@@ -66,7 +66,9 @@ public class FileUploadBean {
         User us = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 
         int fileRecordQty = fileLines.split("\r\n|\r|\n").length - 1;
-
+        
+        fileContainertoDb = new FileContainer();
+        
         fileContainertoDb.setLoad_status("PENDING");
         fileContainertoDb.setName(file.getFileName());
         fileContainertoDb.setUpload_by(us.getUserName());
@@ -114,6 +116,7 @@ public class FileUploadBean {
         } catch (Exception ex) {
             RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message", "Error Uploading File!"));
             Logger.getLogger(FileUploadBean.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
         return;

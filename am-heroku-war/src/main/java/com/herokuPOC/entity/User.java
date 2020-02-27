@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
  * @author jigonzalez
  */
 @Entity
-@Table(name = "user")
+@Table(name = "containeruser", schema="public")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +36,7 @@ public class User implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String organization;
+        private String email;
 	
 
 	public User() {
@@ -90,6 +91,20 @@ public class User implements Serializable {
 	public void setOrganization(String organization) {
 		this.organization = organization;
 	}
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 	
 	

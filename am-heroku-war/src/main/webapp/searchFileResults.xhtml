@@ -23,14 +23,17 @@
                 <h:outputLabel for="username" value="Username: " />
                 <p:inputText style="opacity: 1; background-color: #dddddd;" id="username" value="#{searchController.userName}" readonly="true"></p:inputText>
 
-                <h:outputLabel for="org" value="Organization: "/>
-                <p:inputText required="true" id="org" value="#{searchController.organization}" ></p:inputText>
-
+                <p:outputLabel for="orgs" value="Organization: " />
+                <p:selectOneMenu id="orgs" >
+                    <f:selectItems value="#{searchController.orgList}" var="orglist" itemValue="#{orglist.organization}" itemLabel="#{orglist.organization}" />
+                    <f:selectItem itemLabel="Select a org" itemValue="#{null}" noSelectionOption="true" />
+                </p:selectOneMenu>
+                
                 <h:outputLabel for="calStart" value="Upload Date: " />
-                <p:calendar id="calStart" required="true" value="#{searchController.uploadStartDate}"/>
+                <p:calendar pattern="yyyy-MM-dd" id="calStart" required="true" value="#{searchController.uploadStartDate}"/>
 
                 <h:outputLabel for="calEnd" value="to: " />
-                <p:calendar id="calEnd" required="true" value="#{searchController.uploadEndDate}"/>
+                <p:calendar pattern="yyyy-MM-dd" id="calEnd" required="true" value="#{searchController.uploadEndDate}"/>
 
 
 
@@ -75,7 +78,7 @@
                     <h:outputText value="#{filecontainer.record_err_qty}" />
                 </p:column>
                 <p:column headerText="NB Records Sync SF" resizable="true" width="20%" >
-                    <h:outputText value="#{filecontainer.record_qty}" />
+                    <h:outputText value="#{filecontainer.sf_qty_record_sync}" />
                 </p:column>
                 <p:column headerText="Upload Date" resizable="true" width="20%" >
                     <h:outputText value="#{filecontainer.upload_date}" />

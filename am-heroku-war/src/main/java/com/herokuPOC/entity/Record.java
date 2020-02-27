@@ -6,9 +6,6 @@
 package com.herokuPOC.entity;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,11 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 /**
  *
@@ -36,7 +30,7 @@ public class Record implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(columnDefinition = "serial")
-	private Integer file_id;
+	private Integer recordId;
 	private Integer file_line;
 	
 	private String err_type;
@@ -55,9 +49,11 @@ public class Record implements Serializable {
         private String account_segmentation;
         private String validated;
         private String flagto_sf;
+        private String sfaccount_id;
+        private String sfowner_id;
         
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER) 
 	@JoinColumn(name = "fileContainerId")
 	private FileContainer fileContainer;
 	
@@ -66,14 +62,20 @@ public class Record implements Serializable {
 	}
 
 
-	public Integer getFile_id() {
-		return file_id;
+	
+
+	public Integer getRecordId() {
+		return recordId;
 	}
 
 
-	public void setFile_id(Integer file_id) {
-		this.file_id = file_id;
+
+
+	public void setRecordId(Integer recordId) {
+		this.recordId = recordId;
 	}
+
+
 
 
 	public Integer getFile_line() {
@@ -276,5 +278,37 @@ public class Record implements Serializable {
     }
 	
 	
+        //private String sfowner_id;
 
+    /**
+     * @return the sfowner_id
+     */
+    public String getSfowner_id() {
+        return sfowner_id;
+    }
+
+    /**
+     * @param sfowner_id the sfowner_id to set
+     */
+    public void setSfowner_id(String sfowner_id) {
+        this.sfowner_id = sfowner_id;
+    }
+    
+    
+    
+    
+    /**
+     * @return the sfaccount_id
+     */
+    public String getSfaccount_id() {
+        return sfaccount_id;
+    }
+
+    /**
+     * @param sfaccount_id the sfaccount_id to set
+     */
+    public void setSfaccount_id(String sfaccount_id) {
+        this.sfaccount_id = sfaccount_id;
+    }
+    
 }

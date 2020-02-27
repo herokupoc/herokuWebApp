@@ -186,6 +186,11 @@ public class StorageManager {
                 recordToDb.setFirstname(arrOfStr[9]);
                 recordToDb.setMidname(arrOfStr[10]);
                 recordToDb.setLastname(arrOfStr[11]);
+                recordToDb.setMail(arrOfStr[17]);
+                recordToDb.setCellular(arrOfStr[13]);
+                recordToDb.setAccount_segmentation(arrOfStr[22]);
+                recordToDb.setSfaccount_id(arrOfStr[23]);
+                recordToDb.setSfowner_id(arrOfStr[24]);
                 recordToDb.setFileContainer(fileContainer);
                 
             } catch(NoSuchElementException nsee) {

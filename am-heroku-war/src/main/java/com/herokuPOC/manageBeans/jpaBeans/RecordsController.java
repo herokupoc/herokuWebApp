@@ -5,6 +5,8 @@
  */
 package com.herokuPOC.manageBeans.jpaBeans;
 
+import com.herokuPOC.entity.FileContainer;
+import com.herokuPOC.entity.OrgEncoding;
 import com.herokuPOC.entity.RecordH;
 import com.herokuPOC.services.ContainerManager;
 import java.io.Serializable;
@@ -44,7 +46,9 @@ public class RecordsController implements Serializable {
     private String nbRecords;
     private String errorType;
     private String fileIdSelection;
-
+    private FileContainer fileContainer;
+    private List<OrgEncoding> orgList = new ArrayList<>();
+    
     @PostConstruct
     public void init() {
         setRecordsList(new ArrayList<>());
@@ -237,16 +241,27 @@ public class RecordsController implements Serializable {
     public String recordByFileId() {
         FacesContext fc = FacesContext.getCurrentInstance();
         fileIdSelection = getFileIdParam(fc);
-         
+        
+        fileContainer = recordEJB.findFileByName(Integer.parseInt(fileIdSelection));
+        fileName = fileContainer.getName();
+        uploadDate = fileContainer.getUpload_date().toString();
+        nbRecordsError = fileContainer.getRecord_err_qty().toString();
+        name = fileContainer.getName();
+        status = fileContainer.getLoad_status();
+        nbRecordsSyncSF = fileContainer.getSf_qty_record_sync().toString();
+        nbRecords = fileContainer.getRecord_qty().toString();
+        organization = fileContainer.getName().substring(0, 2);
+
+                
         try {
                 
             setRecordsList(recordEJB.recordsFromFileId(fileIdSelection));
             
             if(this.recordsList.isEmpty()){
-                 RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "Cant find results for this file!!"));
+                 RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "There is no records for this file!!"));
                  return "searchFileResults";
             }
-            
+            this.fileName = "INACIO";
         
         } catch (Exception e) {
           RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Message", "Error in getting records from file!")); 
@@ -257,6 +272,7 @@ public class RecordsController implements Serializable {
 
     //get value from "f:param"
     public String getFileIdParam(FacesContext fc) {
+        
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         setFileName("test");
         setNbRecordsError("1");

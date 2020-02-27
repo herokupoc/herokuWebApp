@@ -6,7 +6,7 @@ heroku login
 heroku run bash
 heroku logs --tail --app worker3
 
-Create a new app in Heroku with its remote
+Create a neww app in Heroku with its remote
 	heroku create --remote staging myApp //Assign the app to a particular remote
 	git remote rename heroku heroku-staging //Rename a remote
 	git config heroku.remote staging //The herokucli commands will refer to this app from now on
@@ -28,7 +28,7 @@ How to Startt Collaborating in this project:
 		>git checkout --track origin/uat
 		>git checkout --track origin/dev
 		
-	Create a remote to heroku. 
+	Create a remote to herokuu 
 		>heroku git:remote -a pocherokudev
 		
 	Verify thatt you have a remote branch in your local git: 

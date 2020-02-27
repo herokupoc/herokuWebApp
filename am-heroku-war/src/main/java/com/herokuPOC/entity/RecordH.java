@@ -36,7 +36,7 @@ public class RecordH implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(columnDefinition = "serial")
-	private Integer file_id;
+	private Integer recordId;
 	private Integer file_line;
 	
 	private String err_type;
@@ -58,6 +58,8 @@ public class RecordH implements Serializable {
         private String account_segmentation;
         private String validated;
         private String flagto_sf;
+        private String sfaccount_id;
+        private String sfowner_id;
         
         
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -79,13 +81,16 @@ public class RecordH implements Serializable {
 	}
 
 
-	public Integer getFile_id() {
-		return file_id;
+	
+
+
+	public Integer getRecordId() {
+		return recordId;
 	}
 
 
-	public void setFile_id(Integer file_id) {
-		this.file_id = file_id;
+	public void setRecordId(Integer recordId) {
+		this.recordId = recordId;
 	}
 
 
@@ -278,4 +283,36 @@ public class RecordH implements Serializable {
         this.flagto_sf = flagto_sf;
     }
 
+        /**
+     * @return the sfowner_id
+     */
+    public String getSfowner_id() {
+        return sfowner_id;
+    }
+
+    /**
+     * @param sfowner_id the sfowner_id to set
+     */
+    public void setSfowner_id(String sfowner_id) {
+        this.sfowner_id = sfowner_id;
+    }
+    
+    
+    
+    
+    /**
+     * @return the sfaccount_id
+     */
+    public String getSfaccount_id() {
+        return sfaccount_id;
+    }
+
+    /**
+     * @param sfaccount_id the sfaccount_id to set
+     */
+    public void setSfaccount_id(String sfaccount_id) {
+        this.sfaccount_id = sfaccount_id;
+    }
+
+    
 }
