@@ -206,6 +206,28 @@
 			</build>
 		</profile>
 		<profile>
+			<id>herokuUat</id>
+			<build>
+				<plugins>	
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webResources>
+								<resource>
+									<directory>
+										build/herokuUat
+									</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>	
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>herokuLocal</id>
 			<build>
 				<plugins>	
