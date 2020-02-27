@@ -15,6 +15,14 @@ import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 
+import com.sendgrid.Content;
+import com.sendgrid.Email;
+import com.sendgrid.Mail;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+
 
 /**
  *
@@ -26,13 +34,14 @@ public class MailManager {
      @PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
     private EntityManager em;
      
-        @EJB
+    @EJB
     private ContainerManager fileUploadFacade;
     
         
     public void sendMail2User(String from,  String subject,String body){
        
         // Create a trust manager that does not validate certificate chains
+    	/*
         TrustManager[] trustAllCerts = new TrustManager[] { 
             new X509TrustManager() {     
                 public java.security.cert.X509Certificate[] getAcceptedIssuers() { 
@@ -79,6 +88,8 @@ public class MailManager {
         } catch (IOException ex) {
           System.out.println("ERRRO: \n" + ex.getLocalizedMessage() );
         }
+        
+        */
        
     }
             
