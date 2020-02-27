@@ -38,9 +38,10 @@ public class JobManager {
     private StorageManager storageManager; 
     @EJB
     private ContainerManager fileUploadFacade;
+    @EJB
+    private MailManager mailManager;
 
-  
-    
+ 
     public void executeJob1(){ 
         
         
@@ -78,7 +79,7 @@ public class JobManager {
                     // send email to central team
                     String body = "Error on process:" + "JOB3\n";
                     body = body + ex.getLocalizedMessage();
-                    //mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
+                    mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Error on heroku POC WebApp",body);
                 }
                 if (success) {
                     // call the PostGreSQL function to validate
@@ -105,7 +106,7 @@ public class JobManager {
            // send email to central team
            String body = "Error on process: checkdataintegrity " + "JOB3" + "\n";
            body = body + iae.getLocalizedMessage();
-           //mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
+           mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Error on heroku POC WebApp",body);
            bReturn = false;           
        }
         return bReturn;
@@ -125,7 +126,7 @@ public class JobManager {
            // send email to central team
            String body = "Error on process: integratedata_sf " + "JOB3" + "\n";
            body = body + iae.getLocalizedMessage();
-           //mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
+           mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Error on heroku POC WebApp",body);
           
        }       
     }

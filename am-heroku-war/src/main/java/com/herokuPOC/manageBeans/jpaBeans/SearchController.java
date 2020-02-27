@@ -9,6 +9,7 @@ import com.herokuPOC.entity.FileContainer;
 import com.herokuPOC.entity.OrgEncoding;
 import com.herokuPOC.entity.User;
 import com.herokuPOC.services.ContainerManager;
+import com.herokuPOC.services.MailManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,7 +46,9 @@ public class SearchController implements Serializable{
 
     @EJB 
     private ContainerManager fileContainerEJB;
-    
+    @EJB
+    private MailManager mailManager;
+        
     User us = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
        
     private List<FileContainer> filesFromDb = new ArrayList<>() ; 
@@ -310,6 +313,12 @@ public class SearchController implements Serializable{
             while ((line = rd.readLine()) != null) {
                 System.out.println(line);    
             }
+            
+            if(job == 3) {
+                String body = "The Container files have now been processed! You can go and check the Status of the records on the Web App!";
+                mailManager.sendMail2User("herokuwebapp@amadeus.com","WebApp - Containers validated",body);
+            }
+            
         } catch (IOException ex) {
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
         }

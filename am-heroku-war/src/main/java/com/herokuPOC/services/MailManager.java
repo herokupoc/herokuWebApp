@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
+import net.sargue.mailgun.Configuration;
+import net.sargue.mailgun.Mail;
 
 
 /**
@@ -26,83 +28,39 @@ public class MailManager {
      
         @EJB
     private ContainerManager fileUploadFacade;
-    
+     
+        
         
     public void sendMail2User(String from,  String subject,String body){
-/*        
-        // Create a trust manager that does not validate certificate chains
-        TrustManager[] trustAllCerts = new TrustManager[] { 
-            new X509TrustManager() {     
-                public java.security.cert.X509Certificate[] getAcceptedIssuers() { 
-                    return new X509Certificate[0];
-                } 
-                @Override
-                public void checkClientTrusted( 
-                    java.security.cert.X509Certificate[] certs, String authType) {
-                    } 
-                @Override
-                public void checkServerTrusted( 
-                    java.security.cert.X509Certificate[] certs, String authType) {
-                }
-            } 
-        }; 
-        // Install the all-trusting trust manager
-        try {
-            SSLContext sc = SSLContext.getInstance("SSL"); 
-            sc.init(null, trustAllCerts, new java.security.SecureRandom()); 
-            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-        } catch (GeneralSecurityException e) {
-        }
-        //User user = (User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-        Email fromNew = new Email(from);
-        String subjectNew = subject;
-        //Email toNew = new Email(user.getEmail());
-        Email toNew = new Email("inacio.ferreira@cgi.com");
-        Content content = new Content("text/plain", body);
-        Mail mail = new Mail(fromNew, subjectNew, toNew, content);
-        String apiKey = System.getenv("SENDGRID_API_KEY");
-        SendGrid sg = new SendGrid(apiKey);
-        Request request = new Request();
-        try {
-          request.method = Method.POST;
-          request.endpoint = "mail/send";
-          request.body = mail.build();
-          String host = sg.getHost();
-          
-          System.out.println("\nHost: " + host);
-          Response response = sg.api(request);
-          System.out.println(response.statusCode);
-          System.out.println(response.body);
-          System.out.println(response.headers);
-        } catch (IOException ex) {
-          System.out.println("ERRRO: \n" + ex.getLocalizedMessage() );
-        }
-        */
+        Configuration configuration = new Configuration()
+        .domain(System.getenv("MAILGUN_DOMAIN"))
+        .apiKey(System.getenv("MAILGUN_API_KEY"))
+        .from("Heroko WebApp", from);
+
+            Mail.using(configuration)
+        .to("jidsnf@gmail.com")
+        .subject(subject)
+        .text(body)
+        .build()
+        .send();       
     }
             
     public void sendMail2CentralTeam(String from, String subject,String body){
-        /*
-        String centralteamEmail = getCentralTeamEmail();
-        Email fromNew = new Email(from);
-        String subjectNew = subject;
-        Email toNew = new Email(centralteamEmail);
-        Content content = new Content("text/plain", body);
-        Mail mail = new Mail(fromNew, subjectNew, toNew, content);
+        //String centralteamEmail = getCentralTeamEmail();
+       
+        String centralteamEmail = "jidsnf@gmail.com";
+        Configuration configuration = new Configuration()
+        .domain(System.getenv("MAILGUN_DOMAIN"))
+        .apiKey(System.getenv("MAILGUN_API_KEY"))
+        .from("Heroko WebApp", from);
 
-        SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
-        Request request = new Request();
-        try {
-          request.method = Method.POST;
-          request.endpoint = "mail/send";
-          request.body = mail.build();
-          Response response = sg.api(request);
-          System.out.println(response.statusCode);
-          System.out.println(response.body);
-          System.out.println(response.headers);
-        } catch (IOException ex) {
-          
-        }
-        */
+            Mail.using(configuration)
+        .to(centralteamEmail)
+        .subject(subject)
+        .text(body)
+        .build()
+        .send();  
+*/            
     }
     
     
