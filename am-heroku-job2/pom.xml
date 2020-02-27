@@ -44,7 +44,7 @@
 		      <configuration>
 		        <archive>
 		          <manifest>
-		            <mainClass>com.herokuPOC.webservices.client.Job3Worker</mainClass>
+		            <mainClass>com.herokuPOC.job.Job2Worker</mainClass>
 		          </manifest>
 		        </archive>
 		        <descriptorRefs>

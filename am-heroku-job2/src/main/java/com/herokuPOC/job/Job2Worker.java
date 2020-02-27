@@ -25,15 +25,17 @@ public class Job2Worker {
     static HttpResponse response ;
     
     public static void main(String[] args) throws ClientProtocolException,IOException{
+    	
+    	System.out.println("Execution of Job2");
         
-    client = new DefaultHttpClient();
-    request = new HttpGet(System.getenv("JOB_API_URI")+"/job/2");
-    response = client.execute(request);
-    BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
-    String line = "";
-    while ((line = rd.readLine()) != null) {
-      System.out.println(line);
-    }
+	    client = new DefaultHttpClient();
+	    request = new HttpGet(System.getenv("JOB_API_URI")+"/job/2");
+	    response = client.execute(request);
+	    BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
+	    String line = "";
+	    while ((line = rd.readLine()) != null) {
+	      System.out.println(line);
+	    }
         
     }
     
