@@ -17,7 +17,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
@@ -48,7 +47,7 @@ public class ContainerManager {
         User user = null;
         String userFromDb;
         
-        try {
+       try{
   
             
             userFromDb = "SELECT u from User u where username = :name and organization= :org ";
@@ -58,13 +57,13 @@ public class ContainerManager {
             
             List<User> userList = query.getResultList();
             
-            
-            
             if(!userList.isEmpty()){
                 user = userList.get(0);
             }
             
         } catch (Exception e) {
+            
+            mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Amadeus heroku Web App Error on Login","Hi, we have an error on Login: \n" + e.getLocalizedMessage());
             throw e;
         
         }

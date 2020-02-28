@@ -19,6 +19,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
  * @author ferreirai
  */
 public class Job3Worker {  
+
     
     static HttpClient client ;
     static HttpGet request ;
@@ -35,6 +36,16 @@ public class Job3Worker {
 	      System.out.println(line);
 	    }
 	    
+            // send the email
+            client = new DefaultHttpClient();
+	    request = new HttpGet(System.getenv("JOB_API_URI")+"/webresources/job/1");
+	    response = client.execute(request);
+	    BufferedReader rd1 = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
+	    String line1 = "";
+	    while ((line1 = rd1.readLine()) != null) {
+	      System.out.println(line1);
+	    }
+            
     	System.out.print("Ejecutando Job3");
         
     }

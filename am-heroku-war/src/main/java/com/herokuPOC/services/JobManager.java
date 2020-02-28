@@ -41,8 +41,7 @@ public class JobManager {
     @EJB
     private MailManager mailManager; 
 
-  
-    
+ 
     public void executeJob1(){ 
         
         
@@ -80,7 +79,7 @@ public class JobManager {
                     // send email to central team
                     String body = "Error on process:" + "JOB3\n";
                     body = body + ex.getLocalizedMessage();
-                    mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
+                    mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Error on heroku POC WebApp",body);
                 }
                 if (success) {
                     // call the PostGreSQL function to validate
@@ -107,7 +106,7 @@ public class JobManager {
            // send email to central team
            String body = "Error on process: checkdataintegrity " + "JOB3" + "\n";
            body = body + iae.getLocalizedMessage();
-           mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
+           mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Error on heroku POC WebApp",body);
            bReturn = false;           
        }
         return bReturn;
@@ -123,11 +122,14 @@ public class JobManager {
 
            System.out.println("integratedata_sf output : " + out.toString());                     
           
+            String body = "The Container files have now been processed! You can go and check the Status of the records on the Web App!";
+            mailManager.sendMail2User("herokuwebapp@amadeus.com","WebApp - Containers validated",body);
+           
        } catch (IllegalArgumentException | IllegalStateException iae){
            // send email to central team
            String body = "Error on process: integratedata_sf " + "JOB3" + "\n";
            body = body + iae.getLocalizedMessage();
-           mailManager.sendMail2CentralTeam("general@amadeus.com","Error on heroku POC WebApp",body);
+           mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Error on heroku POC WebApp",body);
           
        }       
     }
