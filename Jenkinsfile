@@ -41,7 +41,7 @@ node {
 		{	
 			echo 'Running deploy-dev from branch ' + branch
 			//bat 'heroku login'
-			bat 'git push lgonzalez@amadeus.com:Heroku100.@https://git.heroku.com/pocherokudev.git ' + branch + ':master'
+			bat 'git push https://git.heroku.com/pocherokudev.git ' + branch + ':master'
 		}
 		
 	}
