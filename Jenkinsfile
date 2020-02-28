@@ -132,11 +132,13 @@ node {
 	}
 	stage ('heroku-mergeCode-to-master')
 	{
-		if (branch.equals("dev"))
-		{
-
-		}
-
+		echo 'heroku-mergeCode-to-master'
+		
+	}
+	
+	stage ('heroku-communication')
+	{
+		echo 'heroku-communication'
 	}
 
 }
