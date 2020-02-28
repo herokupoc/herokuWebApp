@@ -40,7 +40,7 @@ node {
 		if (userInput) 
 		{	
 			echo 'Running deploy-dev from branch ' + branch
-			bat 'git push heroku-dev ' + branch + ':master'
+			bat 'git push https://git.heroku.com/pocherokudev.git ' + branch + ':master'
 		}
 		
 	}
@@ -71,7 +71,7 @@ node {
 		if (userInput) 
 		{	
 			echo 'heroku-deploy-uat from branch ' + branch
-			bat 'git push heroku-uat ' + branch + ':master'
+			bat 'git push https://git.heroku.com/pocherokuuat.git ' + branch + ':master'
 			if (branch.equals("dev"))
 			{
     			echo 'merging to uat'
@@ -110,7 +110,6 @@ node {
 		if (userInput) 
 		{	
 			echo 'heroku-deploy-prod'
-			bat 'git push heroku-prod ' + branch + ':master'
 		}
 		
 	}
@@ -134,10 +133,7 @@ node {
 	{
 		if (branch.equals("dev"))
 		{
-			echo 'Merging code to Master'	
-			bat 'git checkout prod'
-    		bat 'git merge uat'
-    		bat 'git push'
+
 		}
 
 	}
