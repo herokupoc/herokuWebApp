@@ -9,8 +9,8 @@ node {
 		
 		currentBuild.displayName = currentBuild.number + ' - ' + branch
 		
-		
-		git branch: branch, credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
+		git branch: branch, credentialsId: 'ignramgar', url: 'https://github.com/herokupoc/herokuWebApp.git'
+
 		
 		bat 'git log -1 > lastCommit.txt'
 		
