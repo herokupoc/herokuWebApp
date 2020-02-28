@@ -39,6 +39,17 @@ AS $function$
 		        	          			new.title, new.email, new.acu_decisionmaker__c, new.isdeleted, new.lastmodifiedbyid, NEW.createddate); 	
 	                	    end if;
                           
+	                	   if (OLD._hc_lastop = 'UPDATED' and TG_OP = 'UPDATE')  THEN 
+			                  		--UPDATE//FROM//DB//AND//SYNC//ONSALESFORCE
+									INSERT INTO util.t_util_log (insert_time, log_locale, log_msg) VALUES(current_timestamp, '44 upd da db hclastop', NEW._hc_lastop);
+									INSERT INTO util.t_util_log (insert_time, log_locale, log_msg) VALUES(current_timestamp, '45 upd da db TG_OP', TG_OP);
+									perform central_sf_consolidate(TG_OP ,'SF-ONLINE' ,new.sfid , new.ownerid, new.accountid, new.salutation ,
+			                  			new.firstname, new.middlename, new.lastname, new.mobilephone, new.acu_workphone__c, current_timestamp, 
+			                  			new.title, new.email, new.acu_decisionmaker__c, new.isdeleted, new.lastmodifiedbyid, NEW.createddate); 	
+										
+			                  		end if;
+							    
+	                	   
 								
 			                end if;
 	                  
