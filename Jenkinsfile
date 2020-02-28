@@ -23,6 +23,8 @@ node {
 				   
 		setMavenThreeAndJavaEight()  
 		
+		bat 'mvn clean package'
+		
 		
 	}
 
