@@ -122,6 +122,9 @@ public class JobManager {
 
            System.out.println("integratedata_sf output : " + out.toString());                     
           
+            String body = "The Container files have now been processed! You can go and check the Status of the records on the Web App!";
+            mailManager.sendMail2User("herokuwebapp@amadeus.com","WebApp - Containers validated",body);
+           
        } catch (IllegalArgumentException | IllegalStateException iae){
            // send email to central team
            String body = "Error on process: integratedata_sf " + "JOB3" + "\n";
