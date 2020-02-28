@@ -73,7 +73,7 @@ public class StorageManager {
         // Upload a file as a new object with ContentType and title specified.
         bucketName = System.getenv("S3_BUCKET_NAME");
         System.out.println("bucketName: " + bucketName);
-        clientRegion = Regions.US_EAST_1;
+        clientRegion = Regions.EU_WEST_1;
         s3Client = AmazonS3ClientBuilder.standard()
                 .withRegion(clientRegion)
 		.withCredentials(new EnvironmentVariableCredentialsProvider())
@@ -121,7 +121,7 @@ public class StorageManager {
         
         bucketName = System.getenv("S3_BUCKET_NAME");
         System.out.println("bucketName: " + bucketName);
-        clientRegion = Regions.US_EAST_1;
+        clientRegion = Regions.EU_WEST_1;
         try {
             s3Client = AmazonS3ClientBuilder.standard()
                 .withRegion(clientRegion)
