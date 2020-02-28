@@ -23,7 +23,7 @@ node {
 				   
 		setMavenThreeAndJavaEight()  
 		
-		bat 'mvn clean package'
+		//bat 'mvn clean package'
 		
 		
 	}
@@ -40,6 +40,7 @@ node {
 		if (userInput) 
 		{	
 			echo 'Running deploy-dev from branch ' + branch
+			bat 'heroku login -u lgonzalez@amadeus.com -p Heroku100.'
 			bat 'git push https://git.heroku.com/pocherokudev.git ' + branch + ':master'
 		}
 		
