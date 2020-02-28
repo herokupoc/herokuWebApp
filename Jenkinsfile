@@ -39,7 +39,7 @@ node {
 		
 		if (userInput) 
 		{	
-			echo 'Running deploy-dev'
+			echo 'Running deploy-dev from branch ' + branch
 			bat 'git push heroku-dev ' + branch + ':master'
 		}
 		
@@ -70,13 +70,14 @@ node {
 		
 		if (userInput) 
 		{	
-			echo 'heroku-deploy-uat'
+			echo 'heroku-deploy-uat from branch ' + branch
 			bat 'git push heroku-uat ' + branch + ':master'
 			if (branch.equals("dev"))
 			{
     			echo 'merging to uat'
     			bat 'git checkout uat'
     			bat 'git merge dev'
+    			bat 'git push'
 			}
 				
 		}
@@ -130,10 +131,15 @@ node {
 		
 	}
 	stage ('heroku-mergeCode-to-master')
-	{	
-		echo 'Merging code to Master'	
-		bat 'git checkout prod'
-    	bat 'git merge uat'
+	{
+		if (branch.equals("dev"))
+		{
+			echo 'Merging code to Master'	
+			bat 'git checkout prod'
+    		bat 'git merge uat'
+    		bat 'git push'
+		}
+
 	}
 
 }
