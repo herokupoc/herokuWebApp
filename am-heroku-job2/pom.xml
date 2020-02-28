@@ -21,8 +21,10 @@
 		    <artifactId>httpcore</artifactId>
 		    <version>4.4.13</version>
 		</dependency>
+
 		
-		            <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
 		<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpclient</artifactId>
@@ -42,7 +44,7 @@
 		      <configuration>
 		        <archive>
 		          <manifest>
-		            <mainClass>com.herokuPOC.webservices.client.Job3Worker</mainClass>
+		            <mainClass>com.herokuPOC.job.Job2Worker</mainClass>
 		          </manifest>
 		        </archive>
 		        <descriptorRefs>

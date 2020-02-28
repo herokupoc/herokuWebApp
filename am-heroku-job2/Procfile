@@ -1,0 +1,1 @@
+worker: java -jar target/am-heroku-job2-jar-with-dependencies.jar

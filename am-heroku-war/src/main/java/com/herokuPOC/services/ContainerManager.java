@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.persistence.EntityManager;
@@ -31,6 +32,9 @@ public class ContainerManager {
 
     @PersistenceContext(unitName = "com.amadeus.websolutions_herokuPOC")
     private EntityManager em;
+    
+    @EJB
+    private MailManager mailManager; 
 
     
     public void insertContainer(){ 
@@ -43,7 +47,8 @@ public class ContainerManager {
         User user = null;
         String userFromDb;
         
-        try {
+       try{
+  
             
             userFromDb = "SELECT u from User u where username = :name and organization= :org ";
             Query query = em.createQuery(userFromDb);
@@ -57,6 +62,8 @@ public class ContainerManager {
             }
             
         } catch (Exception e) {
+            
+            mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Amadeus heroku Web App Error on Login","Hi, we have an error on Login: \n" + e.getLocalizedMessage());
             throw e;
         
         }

@@ -7,7 +7,7 @@
         <version>1.0</version>
     </parent>
 
-	<name>herokuPOC-Job2</name>
+	<name>herokuPOC-Job3</name>
 	<artifactId>am-heroku-job3</artifactId>
 	<url>http://maven.apache.org</url>
 	<packaging>jar</packaging>
@@ -42,7 +42,7 @@
 		      <configuration>
 		        <archive>
 		          <manifest>
-		            <mainClass>com.herokuPOC.webservices.client.Job3Worker</mainClass>
+		            <mainClass>com.herokuPOC.job.Job3Worker</mainClass>
 		          </manifest>
 		        </archive>
 		        <descriptorRefs>

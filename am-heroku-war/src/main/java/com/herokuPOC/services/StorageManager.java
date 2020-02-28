@@ -40,6 +40,9 @@ public class StorageManager {
     @EJB
     private ContainerManager recordFacade; 
    
+    @EJB
+    private MailManager mailManager;
+    
     public StorageManager() {
 
    }
@@ -89,10 +92,11 @@ public class StorageManager {
         } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
+            mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Amadeus heroku Web App Storage Error","Hi, we have an error on Storage: \n The call was transmitted successfully, but Amazon S3 couldn't process it, so it returned an error response. \n" + e.getLocalizedMessage());
             e.printStackTrace();
         } catch (SdkClientException e) {
-            // Amazon S3 couldn't be contacted for a response, or the client
-            // couldn't parse the response from Amazon S3.
+            // Amazon S3 couldn't be contacted for a response, or the client couldn't parse the response from Amazon S3.
+            mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Amadeus heroku Web App Storage Error","Hi, we have an error on Storage: \n Amazon S3 couldn't be contacted for a response, or the client couldn't parse the response from Amazon S3. \n" + e.getLocalizedMessage());
             e.printStackTrace();
         }
        
@@ -138,10 +142,12 @@ public class StorageManager {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
+            mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Amadeus heroku Web App Storage Error","Hi, we have an error on Storage: \n The call was transmitted successfully, but Amazon S3 couldn't process it, so it returned an error response. \n" + e.getLocalizedMessage());
             return false;
         } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
+            mailManager.sendMail2CentralTeam("herokuwebapp@amadeus.com","Amadeus heroku Web App Storage Error","Hi, we have an error on Storage: \n Amazon S3 couldn't be contacted for a response, or the client couldn't parse the response from Amazon S3. \n" + e.getLocalizedMessage());
             e.printStackTrace();
             return false;
         } finally {
@@ -194,7 +200,7 @@ public class StorageManager {
                 recordToDb.setFileContainer(fileContainer);
                 
             } catch(NoSuchElementException nsee) {
-                
+                nsee.printStackTrace();
             }
             listToDb.add(recordToDb);
             recordToDb = new Record();
