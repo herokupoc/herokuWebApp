@@ -1,6 +1,6 @@
 node {  
 	
-	stage ('build-app')
+	stage ('heroku-build-app')
 	{     
 		echo 'Running build-app4'
 		
@@ -23,13 +23,13 @@ node {
 				   
 		setMavenThreeAndJavaEight()  
 		
-		bat 'mvn clean package'
+		//bat 'mvn clean package'
 		
 		
 	}
 
 
-	stage ('deploy-heroku-dev')
+	stage ('heroku-deploy-dev')
 	{
 		
 		def userInput = input(message: 'Deploy to DEV Environment?', ok: 'Continue', 
@@ -40,9 +40,90 @@ node {
 		if (userInput) 
 		{	
 			echo 'Running deploy-dev'
+		}
+		
+	}
+	
+	stage ('heroku-test-dev')
+	{
+		
+		def userInput = input(message: 'Do you want to test DEV app in Heroku?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Tests option if you want to test this build or Continue if you want to run next stage',name: 'Execute tests')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-test-dev'
+		}
+		
+	}
+	
+	stage ('heroku-deploy-uat')
+	{
+		
+		def userInput = input(message: 'Deploy to UAT Environment?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Deploy option if you want to deploy this build or Continue if you want to run next stage',name: 'Deploy')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-deploy-uat'
+			if (branch.equals("dev"))
+				echo 'merging to uat'
+		}
+		
+	}
+	
+	stage ('heroku-test-uat')
+	{
+		
+		def userInput = input(message: 'Do you want to test UAT app in Heroku?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Tests option if you want to test this build or Continue if you want to run next stage',name: 'Execute tests')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-test-uat'
+		}
+		
+	}
+	
+	stage ('heroku-deploy-prod')
+	{
+		
+		def userInput = input(message: 'Deploy to PROD Environment?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Deploy option if you want to deploy this build or Continue if you want to run next stage',name: 'Deploy')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-deploy-prod'
+		}
+		
+	}
+	
+	stage ('heroku-smokeTest-Prod')
+	{
+		
+		def userInput = input(message: 'Smoke Test Executed Properly in PROD?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Deploy option if you want to deploy this build or Continue if you want to run next stage',name: 'Deploy')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-smokeTest-Prod'
 			
 		}
 		
+	}
+	stage ('heroku-mergeCode-to-master')
+	{	
+		echo 'Merging code to Master'	
 	}
 
 }
