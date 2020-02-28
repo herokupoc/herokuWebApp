@@ -10,7 +10,7 @@ node {
 		currentBuild.displayName = currentBuild.number + ' - ' + branch
 		
 		
-		git branch: 'dev', credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
+		git branch: branch, credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
 		
 		bat 'git log -1 > lastCommit.txt'
 		
@@ -23,7 +23,7 @@ node {
 				   
 		setMavenThreeAndJavaEight()  
 		
-		//bat 'mvn clean package'
+		bat 'mvn clean package'
 		
 		
 	}
