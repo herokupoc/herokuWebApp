@@ -71,6 +71,7 @@ node {
 		if (userInput) 
 		{	
 			echo 'heroku-deploy-uat from branch ' + branch
+			/*
 			bat 'git push https://git.heroku.com/pocherokuuat.git ' + branch + ':master'
 			if (branch.equals("dev"))
 			{
@@ -79,6 +80,7 @@ node {
     			bat 'git merge dev'
     			bat 'git push'
 			}
+			*/
 				
 		}
 		
