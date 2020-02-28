@@ -13,7 +13,7 @@ Create a neww app in Heroku with its remote
 	
 	heroku config:set PROFILE ="-PherokuDev"
 
-Git commandss:
+Git commands:
 	To see all remotes repositories
 	git remote -v
 	git push heroku dev:master //push to a remote in heroku the local dev to the remote master
