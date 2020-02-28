@@ -133,8 +133,8 @@ Begin
 			 
 			else 
 			 	raise notice 'not found' ;
-		   		return false; 
-		   end if;
+		   		qty_err_rec:= qty_err_rec +1;
+			end if;
 		end if;
 	
 			INSERT INTO public.recordh
@@ -151,7 +151,8 @@ Begin
 		delete from public.record where filecontainerid = rec.filecontainerid ;
 		
 		end loop ; 
-		
+	
+	raise notice 'integrate qty_sync_rec: %', qty_sync_rec ;
 	--itereation for file containers
 	update public.filecontainer 
 	set load_status ='LOADED', record_err_qty = qty_err_rec, sf_qty_record_sync = qty_sync_rec 

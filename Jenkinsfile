@@ -1,9 +1,8 @@
 node {  
-	def out = 'no'
-
-	stage ('build-app')
+	
+	stage ('heroku-build-app')
 	{     
-		echo 'Running build-app'
+		echo 'Running build-app4'
 		
 		echo 'scm_path parameter =' + branch
 		
@@ -11,37 +10,26 @@ node {
 		currentBuild.displayName = currentBuild.number + ' - ' + branch
 		
 		
-		git branch: 'dev', credentialsId: 'ignramgar', url: 'https://github.com/herokupoc/herokuWebApp.git'
+		git branch: branch, credentialsId: 'ignramgar', url: 'C:\\dev\\workspace\\herokuPOC\\AmHerokuWebApp'
 		
-		bat 'git log -1 1 http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' > commit.txt'
+		bat 'git log -1 > lastCommit.txt'
 		
-		commitMessage = readFile 'commit.txt'
-		echo 'Commit message: ' + commitMessage
+		
+		
+		def commitMessage = readFile file: 'lastCommit.txt'
+		echo "Commit message: " + commitMessage
 		currentBuild.description  = commitMessage
 		
-		if(revision.length()>0) {
-			checkout([$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: '51106c7d-3cda-4be9-a9e9-84ebf8b1bc58', depthOption: 'infinity', ignoreExternalsOption: true, local: '.', remote: 'http://ncecvsmad02/scm/svn/amadeus/gda-online-2/'+scm_path+'${revision}']], workspaceUpdater: [$class: 'CheckoutUpdater']])
-		} else {
-			checkout([$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: '51106c7d-3cda-4be9-a9e9-84ebf8b1bc58', depthOption: 'infinity', ignoreExternalsOption: true, local: '.', remote: 'http://ncecvsmad02/scm/svn/amadeus/gda-online-2/'+scm_path]], workspaceUpdater: [$class: 'CheckoutUpdater']])	
-		}
-		   
-		env.SCM_REVISION = revision.replaceAll("@","")
-		echo 'Revision number:' + env.SCM_REVISION
-		//${env.SCM_REVISION}
 				   
-		setMavenThreeAndJavaSeven()  
-		   
-		bat 'mvn clean package -Penv-dev versions:set -DnewVersion=${env.BUILD_NUMBER}'
-		bat "zip -D -r src.zip src/ pom.xml"
-		//Archive artifact to be used later.
-		archive "src.zip"    
+		setMavenThreeAndJavaEight()  
 		
-		bat 'svn copy  --non-interactive -m "branch the current software" http://ncecvsmad02/scm/svn/amadeus/gda-online-2/' + scm_path + ' http://ncecvsmad02/scm/svn/amadeus/gda-online-2/branches/R' + env.BUILD_NUMBER	
+		bat 'mvn clean package'
+		
 		
 	}
 
 
-	stage ('deploy-heroku-dev')
+	stage ('heroku-deploy-dev')
 	{
 		
 		def userInput = input(message: 'Deploy to DEV Environment?', ok: 'Continue', 
@@ -51,33 +39,107 @@ node {
 		
 		if (userInput) 
 		{	
-			echo 'Running deploy-dev'
-			unarchive mapping: ["src.zip": "."]
-			bat 'unzip -o src.zip'
-		   
-			setMavenThreeAndJavaSeven()
-			
-			try {			
-				bat "mvn clean install -Penv-dev versions:set -DnewVersion=${env.BUILD_NUMBER} -DskipTests=true -Dmaven.test.skip=true"			
-			} catch(error) {
-			    echo "First deploy failed, let's retry again"
-			      
-			    retry(5) {				
-					def userInput2 = input(message: 'Deploy failed, retry?', ok: 'Continue', 
-							parameters: [booleanParam(defaultValue: false, 
-							description: 'Check Deploy option if you want to re-deploy this build or Continue if you want to run next stage',name: 'Deploy')])
-			
-					echo ("userInput2: " + userInput2)
-					
-					if (userInput2) {
-						bat "mvn clean install -Penv-dev versions:set -DnewVersion=${env.BUILD_NUMBER} -DskipTests=true -Dmaven.test.skip=true"
-					}
-				}
-			}
-			
-			sleep 90
+			echo 'Running deploy-dev from branch ' + branch
+			bat 'git push heroku-dev ' + branch + ':master'
 		}
 		
+	}
+	
+	stage ('heroku-test-dev')
+	{
+		
+		def userInput = input(message: 'Do you want to test DEV app in Heroku?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Tests option if you want to test this build or Continue if you want to run next stage',name: 'Execute tests')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-test-dev'
+		}
+		
+	}
+	
+	stage ('heroku-deploy-uat')
+	{
+		
+		def userInput = input(message: 'Deploy to UAT Environment?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Deploy option if you want to deploy this build or Continue if you want to run next stage',name: 'Deploy')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-deploy-uat from branch ' + branch
+			bat 'git push heroku-uat ' + branch + ':master'
+			if (branch.equals("dev"))
+			{
+    			echo 'merging to uat'
+    			bat 'git checkout uat'
+    			bat 'git merge dev'
+    			bat 'git push'
+			}
+				
+		}
+		
+	}
+	
+	stage ('heroku-test-uat')
+	{
+		
+		def userInput = input(message: 'Do you want to test UAT app in Heroku?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Tests option if you want to test this build or Continue if you want to run next stage',name: 'Execute tests')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-test-uat'
+		}
+		
+	}
+	
+	stage ('heroku-deploy-prod')
+	{
+		
+		def userInput = input(message: 'Deploy to PROD Environment?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Deploy option if you want to deploy this build or Continue if you want to run next stage',name: 'Deploy')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-deploy-prod'
+			bat 'git push heroku-prod ' + branch + ':master'
+		}
+		
+	}
+	
+	stage ('heroku-smokeTest-Prod')
+	{
+		
+		def userInput = input(message: 'Smoke Test Executed Properly in PROD?', ok: 'Continue', 
+                        parameters: [booleanParam(defaultValue: false, 
+                        description: 'Check Deploy option if you want to deploy this build or Continue if you want to run next stage',name: 'Deploy')])
+		echo ("userInput: " + userInput)
+		
+		if (userInput) 
+		{	
+			echo 'heroku-smokeTest-Prod'
+			
+		}
+		
+	}
+	stage ('heroku-mergeCode-to-master')
+	{
+		if (branch.equals("dev"))
+		{
+			echo 'Merging code to Master'	
+			bat 'git checkout prod'
+    		bat 'git merge uat'
+    		bat 'git push'
+		}
+
 	}
 
 }
