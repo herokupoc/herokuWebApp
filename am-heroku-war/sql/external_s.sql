@@ -1,0 +1,12 @@
+CREATE SEQUENCE public.external_s
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 5
+	CACHE 1
+	NO CYCLE;
+
+-- Permissions
+
+ALTER SEQUENCE public.external_s OWNER TO u7o65omoun2b31;
+GRANT ALL ON SEQUENCE public.external_s TO u7o65omoun2b31;
