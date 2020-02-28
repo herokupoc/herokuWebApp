@@ -121,7 +121,7 @@ public class StorageManager {
         
         bucketName = System.getenv("S3_BUCKET_NAME");
         System.out.println("bucketName: " + bucketName);
-        clientRegion = Regions.EU_WEST_1;
+        clientRegion = Regions.EU_WEST_1; 
         try {
             s3Client = AmazonS3ClientBuilder.standard()
                 .withRegion(clientRegion)

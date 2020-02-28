@@ -33,6 +33,7 @@ public class MailManager {
         
         
     public void sendMail2User(String from,  String subject,String body){
+        /*
         Configuration configuration = new Configuration()
         .domain(System.getenv("MAILGUN_DOMAIN"))
         .apiKey(System.getenv("MAILGUN_API_KEY"))
@@ -44,12 +45,12 @@ public class MailManager {
         .text(body)
         .build()
         .send();       
-       
+       */
     }
             
     public void sendMail2CentralTeam(String from, String subject,String body){
         //String centralteamEmail = getCentralTeamEmail();
-       
+       /*
         String centralteamEmail = "nader.rouis@amadeus.com";
         Configuration configuration = new Configuration()
         .domain(System.getenv("MAILGUN_DOMAIN"))
@@ -62,7 +63,7 @@ public class MailManager {
         .text(body)
         .build()
         .send();  
-           
+           */
     }
     
     
